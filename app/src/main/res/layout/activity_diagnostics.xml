@@ -3,24 +3,24 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/spider_background"
+  android:background="@color/urchin_background"
   android:orientation="vertical">
 
   <com.google.android.material.appbar.MaterialToolbar
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/spider_surface"
+    android:background="@color/urchin_surface"
     android:elevation="0dp"
     android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
     android:title="@string/diagnostics"
-    app:navigationIconTint="@color/spider_secondary"
-    app:titleTextColor="@color/spider_on_surface" />
+    app:navigationIconTint="@color/urchin_secondary"
+    app:titleTextColor="@color/urchin_on_surface" />
 
   <View
     android:layout_width="match_parent"
     android:layout_height="1dp"
-    android:background="@color/spider_stroke_soft" />
+    android:background="@color/urchin_stroke_soft" />
 
   <ScrollView
     android:id="@+id/diagnosticsScroll"
@@ -36,7 +36,7 @@
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/copyDebugReportButton"
-        style="@style/SpiderSecondaryButton"
+        style="@style/UrchinSecondaryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/copy_scan_debug_report" />
@@ -49,7 +49,7 @@
         android:background="@drawable/panel_surface_subtle"
         android:fontFamily="monospace"
         android:padding="16dp"
-        android:textColor="@color/spider_on_surface"
+        android:textColor="@color/urchin_on_surface"
         android:textIsSelectable="true" />
     </LinearLayout>
   </ScrollView>

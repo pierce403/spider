@@ -14,7 +14,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PACKAGE="ninja.spider"
+PACKAGE="guru.urchin"
 DEFAULT_PORT=1234
 DEFAULT_DURATION=15
 SIMULATOR_PID=""
@@ -53,7 +53,7 @@ cleanup() {
   echo "Removed adb reverse for port $PORT"
 
   # Reset preferences
-  adb shell "run-as $PACKAGE sh -c 'rm -f shared_prefs/spider_sdr.xml'" 2>/dev/null || true
+  adb shell "run-as $PACKAGE sh -c 'rm -f shared_prefs/urchin_sdr.xml'" 2>/dev/null || true
   adb shell am force-stop "$PACKAGE" 2>/dev/null || true
   echo "Cleared preferences and stopped app"
 
@@ -108,7 +108,7 @@ SDR_PREFS="<?xml version=\"1.0\" encoding=\"utf-8\"?>
   <int name=\"sdr_frequency\" value=\"433\" />
 </map>"
 adb shell "run-as $PACKAGE mkdir -p shared_prefs"
-echo "$SDR_PREFS" | adb shell "run-as $PACKAGE sh -c 'cat > shared_prefs/spider_sdr.xml'"
+echo "$SDR_PREFS" | adb shell "run-as $PACKAGE sh -c 'cat > shared_prefs/urchin_sdr.xml'"
 echo "SDR: source=network, host=127.0.0.1, port=$PORT"
 
 # 5. Force-stop, relaunch, and start scanning
@@ -127,7 +127,7 @@ echo "Scan started"
 # 6. Watch for SDR observations
 echo ""
 echo "--- Watching logcat for SDR observations (${DURATION}s) ---"
-adb logcat -v time -s "spider:*" 2>/dev/null | grep --line-buffered -i "sdr\|tpms\|network bridge" &
+adb logcat -v time -s "urchin:*" 2>/dev/null | grep --line-buffered -i "sdr\|tpms\|network bridge" &
 LOGCAT_PID=$!
 
 sleep "$DURATION"
@@ -139,8 +139,8 @@ kill "$LOGCAT_PID" 2>/dev/null || true
 wait "$LOGCAT_PID" 2>/dev/null || true
 LOGCAT_PID=""
 
-SDR_LINES=$(adb logcat -d -v time -s "spider:*" 2>/dev/null | grep -ci "SDR observation" || true)
-BRIDGE_LINES=$(adb logcat -d -v time -s "spider:*" 2>/dev/null | grep -ci "network bridge" || true)
+SDR_LINES=$(adb logcat -d -v time -s "urchin:*" 2>/dev/null | grep -ci "SDR observation" || true)
+BRIDGE_LINES=$(adb logcat -d -v time -s "urchin:*" 2>/dev/null | grep -ci "network bridge" || true)
 
 echo "SDR observation log lines: $SDR_LINES"
 echo "Network bridge log lines:  $BRIDGE_LINES"

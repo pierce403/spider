@@ -4,7 +4,7 @@
   android:id="@+id/drawerLayout"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/spider_background">
+  android:background="@color/urchin_background">
 
   <LinearLayout
     android:layout_width="match_parent"
@@ -15,18 +15,18 @@
       android:id="@+id/toolbar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/spider_surface"
+      android:background="@color/urchin_surface"
       android:elevation="0dp"
       android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
       android:title="@string/app_name_header"
-      app:navigationIconTint="@color/spider_secondary"
-      app:subtitleTextColor="@color/spider_secondary"
-      app:titleTextColor="@color/spider_on_surface" />
+      app:navigationIconTint="@color/urchin_secondary"
+      app:subtitleTextColor="@color/urchin_secondary"
+      app:titleTextColor="@color/urchin_on_surface" />
 
     <View
       android:layout_width="match_parent"
       android:layout_height="1dp"
-      android:background="@color/spider_stroke_soft" />
+      android:background="@color/urchin_stroke_soft" />
 
     <FrameLayout
       android:layout_width="match_parent"
@@ -51,7 +51,7 @@
         android:gravity="center"
         android:padding="20dp"
         android:text="@string/no_devices"
-        android:textColor="@color/spider_on_background"
+        android:textColor="@color/urchin_on_background"
         android:visibility="gone" />
     </FrameLayout>
   </LinearLayout>
@@ -61,7 +61,7 @@
     android:layout_width="340dp"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:background="@color/spider_surface"
+    android:background="@color/urchin_surface"
     android:fillViewport="true">
 
     <LinearLayout
@@ -78,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/filters_panel_title"
-        android:textColor="@color/spider_secondary"
+        android:textColor="@color/urchin_secondary"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/scan_inactive"
-        android:textColor="@color/spider_secondary"
+        android:textColor="@color/urchin_secondary"
         android:textStyle="bold" />
 
       <TextView
@@ -96,11 +96,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textColor="@color/spider_on_background" />
+        android:textColor="@color/urchin_on_background" />
 
       <com.google.android.material.button.MaterialButton
         android:id="@+id/permissionActionButton"
-        style="@style/SpiderSecondaryButton"
+        style="@style/UrchinSecondaryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -113,14 +113,14 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/panel_surface_subtle"
         android:padding="14dp"
-        android:textColor="@color/spider_on_surface" />
+        android:textColor="@color/urchin_on_surface" />
 
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:text="@string/source_label"
-        android:textColor="@color/spider_secondary"
+        android:textColor="@color/urchin_secondary"
         android:textStyle="bold" />
 
       <RadioGroup
@@ -134,14 +134,14 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/usb_source_label"
-          android:textColor="@color/spider_on_surface" />
+          android:textColor="@color/urchin_on_surface" />
 
         <RadioButton
           android:id="@+id/networkSource"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/network_source_label"
-          android:textColor="@color/spider_on_surface" />
+          android:textColor="@color/urchin_on_surface" />
       </RadioGroup>
 
       <LinearLayout
@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/network_host"
             android:inputType="textUri"
-            android:textColor="@color/spider_on_surface" />
+            android:textColor="@color/urchin_on_surface" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -176,7 +176,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/network_port"
             android:inputType="number"
-            android:textColor="@color/spider_on_surface" />
+            android:textColor="@color/urchin_on_surface" />
         </com.google.android.material.textfield.TextInputLayout>
       </LinearLayout>
 
@@ -185,7 +185,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:text="@string/frequency_label"
-        android:textColor="@color/spider_secondary"
+        android:textColor="@color/urchin_secondary"
         android:textStyle="bold" />
 
       <RadioGroup
@@ -200,7 +200,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/frequency_315"
-          android:textColor="@color/spider_on_surface" />
+          android:textColor="@color/urchin_on_surface" />
 
         <RadioButton
           android:id="@+id/freq433"
@@ -208,7 +208,7 @@
           android:layout_height="wrap_content"
           android:layout_marginStart="16dp"
           android:text="@string/frequency_433"
-          android:textColor="@color/spider_on_surface" />
+          android:textColor="@color/urchin_on_surface" />
       </RadioGroup>
 
       <com.google.android.material.textfield.TextInputLayout
@@ -222,14 +222,14 @@
           android:layout_height="wrap_content"
           android:hint="@string/gain_hint"
           android:inputType="number"
-          android:textColor="@color/spider_on_surface" />
+          android:textColor="@color/urchin_on_surface" />
       </com.google.android.material.textfield.TextInputLayout>
 
       <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="20dp"
-        android:background="@color/spider_stroke_soft" />
+        android:background="@color/urchin_stroke_soft" />
 
       <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -241,8 +241,8 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:hint="@string/filter_hint"
-          android:textColor="@color/spider_on_surface"
-          android:textColorHint="@color/spider_secondary" />
+          android:textColor="@color/urchin_on_surface"
+          android:textColorHint="@color/urchin_secondary" />
       </com.google.android.material.textfield.TextInputLayout>
 
       <LinearLayout
@@ -256,7 +256,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="@string/sort_label"
-          android:textColor="@color/spider_on_background" />
+          android:textColor="@color/urchin_on_background" />
 
         <Spinner
           android:id="@+id/sortSpinner"
@@ -272,7 +272,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="@string/live_only"
-        android:textColor="@color/spider_on_background" />
+        android:textColor="@color/urchin_on_background" />
 
       <CheckBox
         android:id="@+id/starredOnly"
@@ -280,7 +280,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/starred_only"
-        android:textColor="@color/spider_on_background" />
+        android:textColor="@color/urchin_on_background" />
 
       <CheckBox
         android:id="@+id/batteryLowOnly"
@@ -288,7 +288,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/battery_low_only"
-        android:textColor="@color/spider_on_background" />
+        android:textColor="@color/urchin_on_background" />
     </LinearLayout>
   </ScrollView>
 

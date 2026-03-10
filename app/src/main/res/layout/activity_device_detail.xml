@@ -3,24 +3,24 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/spider_background"
+  android:background="@color/urchin_background"
   android:orientation="vertical">
 
   <com.google.android.material.appbar.MaterialToolbar
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/spider_surface"
+    android:background="@color/urchin_surface"
     android:elevation="0dp"
     android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
     android:title="@string/device_details"
-    app:navigationIconTint="@color/spider_secondary"
-    app:titleTextColor="@color/spider_on_surface" />
+    app:navigationIconTint="@color/urchin_secondary"
+    app:titleTextColor="@color/urchin_on_surface" />
 
   <View
     android:layout_width="match_parent"
     android:layout_height="1dp"
-    android:background="@color/spider_stroke_soft" />
+    android:background="@color/urchin_stroke_soft" />
 
   <ScrollView
     android:id="@+id/detailScroll"
@@ -38,7 +38,7 @@
         android:id="@+id/detailName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/spider_secondary"
+        android:textColor="@color/urchin_secondary"
         android:textSize="22sp"
         android:textStyle="bold" />
 
@@ -47,42 +47,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textColor="@color/spider_on_background" />
+        android:textColor="@color/urchin_on_background" />
 
       <TextView
         android:id="@+id/detailKey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textColor="@color/spider_on_background" />
+        android:textColor="@color/urchin_on_background" />
 
       <TextView
         android:id="@+id/detailFirstSeen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:textColor="@color/spider_on_background" />
+        android:textColor="@color/urchin_on_background" />
 
       <TextView
         android:id="@+id/detailLastSeen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:textColor="@color/spider_on_background" />
+        android:textColor="@color/urchin_on_background" />
 
       <TextView
         android:id="@+id/detailStats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textColor="@color/spider_on_background" />
+        android:textColor="@color/urchin_on_background" />
 
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:text="@string/latest_reading"
-        android:textColor="@color/spider_secondary"
+        android:textColor="@color/urchin_secondary"
         android:textStyle="bold" />
 
       <TextView
@@ -92,7 +92,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/panel_surface_subtle"
         android:padding="16dp"
-        android:textColor="@color/spider_on_surface"
+        android:textColor="@color/urchin_on_surface"
         android:textIsSelectable="true" />
 
       <TextView
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:text="@string/raw_json"
-        android:textColor="@color/spider_secondary"
+        android:textColor="@color/urchin_secondary"
         android:textStyle="bold" />
 
       <TextView
@@ -111,7 +111,7 @@
         android:background="@drawable/panel_surface_subtle"
         android:fontFamily="monospace"
         android:padding="16dp"
-        android:textColor="@color/spider_on_surface"
+        android:textColor="@color/urchin_on_surface"
         android:textIsSelectable="true" />
 
       <TextView
@@ -119,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:text="@string/sightings"
-        android:textColor="@color/spider_secondary"
+        android:textColor="@color/urchin_secondary"
         android:textStyle="bold" />
 
       <androidx.recyclerview.widget.RecyclerView

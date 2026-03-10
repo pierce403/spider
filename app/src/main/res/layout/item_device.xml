@@ -8,12 +8,12 @@
   android:layout_marginBottom="8dp"
   android:clickable="true"
   android:foreground="?attr/selectableItemBackground"
-  app:cardBackgroundColor="@color/spider_surface_variant"
+  app:cardBackgroundColor="@color/urchin_surface_variant"
   app:cardCornerRadius="20dp"
   app:cardElevation="0dp"
   app:cardUseCompatPadding="false"
-  app:rippleColor="@color/spider_secondary"
-  app:strokeColor="@color/spider_stroke_soft"
+  app:rippleColor="@color/urchin_secondary"
+  app:strokeColor="@color/urchin_stroke_soft"
   app:strokeWidth="1dp">
 
   <LinearLayout
@@ -34,7 +34,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textColor="@color/spider_secondary"
+        android:textColor="@color/urchin_secondary"
         android:textStyle="bold"
         android:textSize="16sp" />
 
@@ -50,7 +50,7 @@
         android:paddingEnd="4dp"
         android:paddingBottom="4dp"
         android:text="☆"
-        android:textColor="@color/spider_primary"
+        android:textColor="@color/urchin_primary"
         android:textSize="22sp"
         android:textStyle="bold" />
     </LinearLayout>
@@ -60,13 +60,13 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="6dp"
-      android:textColor="@color/spider_on_background" />
+      android:textColor="@color/urchin_on_background" />
 
     <TextView
       android:id="@+id/deviceRssi"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="4dp"
-      android:textColor="@color/spider_primary" />
+      android:textColor="@color/urchin_primary" />
   </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

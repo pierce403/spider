@@ -4,10 +4,10 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:layout_marginBottom="10dp"
-  app:cardBackgroundColor="@color/spider_surface"
+  app:cardBackgroundColor="@color/urchin_surface"
   app:cardCornerRadius="18dp"
   app:cardElevation="0dp"
-  app:strokeColor="@color/spider_stroke_soft"
+  app:strokeColor="@color/urchin_stroke_soft"
   app:strokeWidth="1dp">
 
   <LinearLayout
@@ -20,7 +20,7 @@
       android:id="@+id/sightingTimestamp"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:textColor="@color/spider_secondary"
+      android:textColor="@color/urchin_secondary"
       android:textStyle="bold" />
 
     <TextView
@@ -28,13 +28,13 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="4dp"
-      android:textColor="@color/spider_primary" />
+      android:textColor="@color/urchin_primary" />
 
     <TextView
       android:id="@+id/sightingMeta"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="4dp"
-      android:textColor="@color/spider_on_background" />
+      android:textColor="@color/urchin_on_background" />
   </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

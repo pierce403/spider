@@ -1,6 +1,6 @@
-# Spider
+# Urchin
 
-Spider is an Android SDR app for local TPMS reconnaissance. It keeps the useful parts of the Unagi SDR/TPMS work, drops the Bluetooth stack entirely, and focuses on capturing `rtl_433` JSON from either:
+Urchin is an Android SDR app for local TPMS reconnaissance. It keeps the useful parts of the Unagi SDR/TPMS work, drops the Bluetooth stack entirely, and focuses on capturing `rtl_433` JSON from either:
 
 - A USB-attached RTL-SDR dongle
 - A USB-attached HackRF One
@@ -8,7 +8,7 @@ Spider is an Android SDR app for local TPMS reconnaissance. It keeps the useful 
 
 The app stores observations locally, shows live and historical sensor sightings, exposes raw JSON for export, and uses a yellow-on-black UI theme.
 
-The project landing page is intended for `https://spider.surf/`.
+The project landing page is intended for `https://urchin.guru/`.
 
 ## Scope
 
@@ -41,7 +41,7 @@ The current debug build can be staged from:
 
 The site download is intended to point at:
 
-- `downloads/spider-v0.1.0-debug.apk`
+- `downloads/urchin-v0.1.1-debug.apk`
 
 ## SDR notes
 

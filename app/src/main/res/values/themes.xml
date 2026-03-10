@@ -1,26 +1,26 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-  <style name="Theme.Spider" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-    <item name="colorPrimary">@color/spider_primary</item>
-    <item name="colorPrimaryVariant">@color/spider_primary_variant</item>
-    <item name="colorSecondary">@color/spider_secondary</item>
-    <item name="colorSecondaryVariant">@color/spider_secondary_variant</item>
-    <item name="colorSurface">@color/spider_surface</item>
-    <item name="colorSurfaceVariant">@color/spider_surface_variant</item>
-    <item name="android:colorBackground">@color/spider_background</item>
-    <item name="colorOnPrimary">@color/spider_on_primary</item>
-    <item name="colorOnSecondary">@color/spider_on_secondary</item>
-    <item name="colorOnBackground">@color/spider_on_background</item>
-    <item name="colorOnSurface">@color/spider_on_surface</item>
-    <item name="android:statusBarColor" tools:targetApi="l">@color/spider_background</item>
-    <item name="android:navigationBarColor" tools:targetApi="o_mr1">@color/spider_background</item>
-    <item name="android:windowBackground">@color/spider_background</item>
+  <style name="Theme.Urchin" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <item name="colorPrimary">@color/urchin_primary</item>
+    <item name="colorPrimaryVariant">@color/urchin_primary_variant</item>
+    <item name="colorSecondary">@color/urchin_secondary</item>
+    <item name="colorSecondaryVariant">@color/urchin_secondary_variant</item>
+    <item name="colorSurface">@color/urchin_surface</item>
+    <item name="colorSurfaceVariant">@color/urchin_surface_variant</item>
+    <item name="android:colorBackground">@color/urchin_background</item>
+    <item name="colorOnPrimary">@color/urchin_on_primary</item>
+    <item name="colorOnSecondary">@color/urchin_on_secondary</item>
+    <item name="colorOnBackground">@color/urchin_on_background</item>
+    <item name="colorOnSurface">@color/urchin_on_surface</item>
+    <item name="android:statusBarColor" tools:targetApi="l">@color/urchin_background</item>
+    <item name="android:navigationBarColor" tools:targetApi="o_mr1">@color/urchin_background</item>
+    <item name="android:windowBackground">@color/urchin_background</item>
     <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
     <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
-    <item name="android:textColorPrimary">@color/spider_on_surface</item>
-    <item name="android:textColorSecondary">@color/spider_on_background</item>
-    <item name="colorControlActivated">@color/spider_secondary</item>
-    <item name="colorControlNormal">@color/spider_on_surface</item>
-    <item name="textInputStyle">@style/SpiderTextInputStyle</item>
-    <item name="spinnerStyle">@style/SpiderSpinnerStyle</item>
+    <item name="android:textColorPrimary">@color/urchin_on_surface</item>
+    <item name="android:textColorSecondary">@color/urchin_on_background</item>
+    <item name="colorControlActivated">@color/urchin_secondary</item>
+    <item name="colorControlNormal">@color/urchin_on_surface</item>
+    <item name="textInputStyle">@style/UrchinTextInputStyle</item>
+    <item name="spinnerStyle">@style/UrchinSpinnerStyle</item>
   </style>
 </resources>

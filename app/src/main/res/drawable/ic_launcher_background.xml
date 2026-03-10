@@ -5,6 +5,6 @@
     android:viewportWidth="128"
     android:viewportHeight="128">
     <path
-        android:fillColor="@color/spider_background"
+        android:fillColor="@color/urchin_background"
         android:pathData="M0,0h128v128h-128z"/>
 </vector>

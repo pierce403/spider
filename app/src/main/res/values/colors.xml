@@ -1,16 +1,16 @@
 <resources>
-  <color name="spider_primary">#F6C400</color>
-  <color name="spider_primary_variant">#C69600</color>
-  <color name="spider_secondary">#FFD95A</color>
-  <color name="spider_secondary_variant">#E7B300</color>
-  <color name="spider_background">#090909</color>
-  <color name="spider_surface">#131313</color>
-  <color name="spider_surface_variant">#1E1E1E</color>
-  <color name="spider_on_primary">#101010</color>
-  <color name="spider_on_secondary">#101010</color>
-  <color name="spider_on_background">#F7F0C5</color>
-  <color name="spider_on_surface">#FFF9DA</color>
-  <color name="spider_stroke">#66F6C400</color>
-  <color name="spider_stroke_soft">#33F6C400</color>
-  <color name="spider_error">#FF6B4A</color>
+  <color name="urchin_primary">#F6C400</color>
+  <color name="urchin_primary_variant">#C69600</color>
+  <color name="urchin_secondary">#FFD95A</color>
+  <color name="urchin_secondary_variant">#E7B300</color>
+  <color name="urchin_background">#090909</color>
+  <color name="urchin_surface">#131313</color>
+  <color name="urchin_surface_variant">#1E1E1E</color>
+  <color name="urchin_on_primary">#101010</color>
+  <color name="urchin_on_secondary">#101010</color>
+  <color name="urchin_on_background">#F7F0C5</color>
+  <color name="urchin_on_surface">#FFF9DA</color>
+  <color name="urchin_stroke">#66F6C400</color>
+  <color name="urchin_stroke_soft">#33F6C400</color>
+  <color name="urchin_error">#FF6B4A</color>
 </resources>

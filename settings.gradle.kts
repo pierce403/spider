@@ -14,5 +14,5 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "spider"
+rootProject.name = "urchin"
 include(":app")

@@ -7,22 +7,22 @@ TARGET_DIR="$ROOT_DIR/downloads"
 VERSION_NAME="$(sed -n 's/.*versionName = "\(.*\)"/\1/p' "$ROOT_DIR/app/build.gradle.kts" | head -n 1)"
 
 if [[ -z "$VERSION_NAME" ]]; then
-  printf "[spider] ERROR: could not read versionName from app/build.gradle.kts\n" >&2
+  printf "[urchin] ERROR: could not read versionName from app/build.gradle.kts\n" >&2
   exit 1
 fi
 
-TARGET_BASENAME="spider-v${VERSION_NAME}-debug.apk"
+TARGET_BASENAME="urchin-v${VERSION_NAME}-debug.apk"
 TARGET_APK="$TARGET_DIR/$TARGET_BASENAME"
 INDEX_HTML="$ROOT_DIR/index.html"
 
 if [[ ! -f "$SOURCE_APK" ]]; then
-  printf "[spider] ERROR: missing APK at %s\n" "$SOURCE_APK" >&2
-  printf "[spider] Run ./gradlew assembleDebug first.\n" >&2
+  printf "[urchin] ERROR: missing APK at %s\n" "$SOURCE_APK" >&2
+  printf "[urchin] Run ./gradlew assembleDebug first.\n" >&2
   exit 1
 fi
 
 mkdir -p "$TARGET_DIR"
-rm -f "$TARGET_DIR"/spider-debug.apk "$TARGET_DIR"/spider-v*-debug.apk
+rm -f "$TARGET_DIR"/urchin-debug.apk "$TARGET_DIR"/urchin-v*-debug.apk
 install -m 0644 "$SOURCE_APK" "$TARGET_APK"
 
 python3 - <<'PY' "$INDEX_HTML" "$TARGET_BASENAME"
@@ -34,12 +34,12 @@ index_path = Path(sys.argv[1])
 apk_name = sys.argv[2]
 contents = index_path.read_text()
 updated = re.sub(
-    r"downloads/spider(?:-v[0-9A-Za-z._-]+)?-debug\.apk",
+    r"downloads/urchin(?:-v[0-9A-Za-z._-]+)?-debug\.apk",
     f"downloads/{apk_name}",
     contents,
 )
 index_path.write_text(updated)
 PY
 
-printf "[spider] Staged APK at %s\n" "$TARGET_APK"
-printf "[spider] Updated website download links to downloads/%s\n" "$TARGET_BASENAME"
+printf "[urchin] Staged APK at %s\n" "$TARGET_APK"
+printf "[urchin] Updated website download links to downloads/%s\n" "$TARGET_BASENAME"

@@ -1,6 +1,6 @@
 <resources>
-  <string name="app_name">Spider</string>
-  <string name="app_name_header">Spider SDR</string>
+  <string name="app_name">Urchin</string>
+  <string name="app_name_header">Urchin SDR</string>
   <string name="open_filters">Open controls</string>
   <string name="filters_panel_title">Capture Control</string>
   <string name="scan_start">Start</string>
@@ -57,7 +57,7 @@
   <string name="device_json_saved_downloads">Saved %1$s to Downloads.</string>
   <string name="device_json_save_failed">Could not save the JSON export.</string>
   <string name="device_json_saved">Saved %1$s.</string>
-  <string name="device_json_share_subject">Spider export %1$s</string>
+  <string name="device_json_share_subject">Urchin export %1$s</string>
   <string name="copied_to_clipboard_simple">Copied to clipboard.</string>
   <string name="star_device">Star sensor</string>
   <string name="unstar_device">Unstar sensor</string>

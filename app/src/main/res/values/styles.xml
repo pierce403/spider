@@ -1,32 +1,32 @@
 <resources>
-  <style name="SpiderTextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-    <item name="boxBackgroundColor">@color/spider_surface_variant</item>
-    <item name="boxStrokeColor">@color/spider_secondary</item>
+  <style name="UrchinTextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <item name="boxBackgroundColor">@color/urchin_surface_variant</item>
+    <item name="boxStrokeColor">@color/urchin_secondary</item>
     <item name="boxStrokeWidth">1dp</item>
     <item name="boxStrokeWidthFocused">2dp</item>
-    <item name="hintTextColor">@color/spider_secondary</item>
+    <item name="hintTextColor">@color/urchin_secondary</item>
   </style>
 
-  <style name="SpiderSpinnerStyle" parent="Widget.AppCompat.Spinner.Underlined">
-    <item name="android:backgroundTint">@color/spider_secondary</item>
-    <item name="android:popupBackground">@color/spider_surface_variant</item>
+  <style name="UrchinSpinnerStyle" parent="Widget.AppCompat.Spinner.Underlined">
+    <item name="android:backgroundTint">@color/urchin_secondary</item>
+    <item name="android:popupBackground">@color/urchin_surface_variant</item>
   </style>
 
-  <style name="SpiderPrimaryButton" parent="Widget.MaterialComponents.Button">
-    <item name="android:textColor">@color/spider_on_primary</item>
-    <item name="backgroundTint">@color/spider_primary</item>
+  <style name="UrchinPrimaryButton" parent="Widget.MaterialComponents.Button">
+    <item name="android:textColor">@color/urchin_on_primary</item>
+    <item name="backgroundTint">@color/urchin_primary</item>
     <item name="cornerRadius">18dp</item>
     <item name="elevation">0dp</item>
-    <item name="rippleColor">@color/spider_secondary</item>
+    <item name="rippleColor">@color/urchin_secondary</item>
   </style>
 
-  <style name="SpiderSecondaryButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
-    <item name="android:textColor">@color/spider_on_surface</item>
-    <item name="backgroundTint">@color/spider_surface_variant</item>
-    <item name="strokeColor">@color/spider_secondary</item>
+  <style name="UrchinSecondaryButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <item name="android:textColor">@color/urchin_on_surface</item>
+    <item name="backgroundTint">@color/urchin_surface_variant</item>
+    <item name="strokeColor">@color/urchin_secondary</item>
     <item name="strokeWidth">1dp</item>
     <item name="cornerRadius">18dp</item>
     <item name="elevation">0dp</item>
-    <item name="rippleColor">@color/spider_secondary</item>
+    <item name="rippleColor">@color/urchin_secondary</item>
   </style>
 </resources>

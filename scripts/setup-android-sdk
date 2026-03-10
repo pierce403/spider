@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# spider Android SDK bootstrap (no Android Studio).
+# urchin Android SDK bootstrap (no Android Studio).
 # This script is intentionally conservative: it guides and verifies rather than assuming.
 
 OS="$(uname -s)"
@@ -28,8 +28,8 @@ if [[ -z "$TOOLS_ZIP_URL" ]]; then
   esac
 fi
 
-log() { printf "[spider] %s\n" "$*"; }
-err() { printf "[spider] ERROR: %s\n" "$*" >&2; }
+log() { printf "[urchin] %s\n" "$*"; }
+err() { printf "[urchin] ERROR: %s\n" "$*" >&2; }
 
 require_cmd() {
   if ! command -v "$1" >/dev/null 2>&1; then

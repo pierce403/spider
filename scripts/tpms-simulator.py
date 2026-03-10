@@ -3,7 +3,7 @@
 TPMS Simulator — sends rtl_433-format JSON lines over TCP.
 
 Simulates multiple TPMS sensors broadcasting on 433.92 MHz with realistic
-pressure, temperature, and battery data. Designed for testing the UNAGI SDR
+pressure, temperature, and battery data. Designed for testing the Urchin SDR
 pipeline without real RF hardware.
 
 Usage:
@@ -13,7 +13,7 @@ Usage:
   python3 scripts/tpms-simulator.py --sensors 8          # 8 distinct sensors
   python3 scripts/tpms-simulator.py --interval 0.5       # 500ms between readings
 
-Connect from UNAGI using SdrPreferences: source=NETWORK, host=<this-IP>, port=1234
+Connect from Urchin using SdrPreferences: source=NETWORK, host=<this-IP>, port=1234
 Or use adb forward: adb forward tcp:1234 tcp:1234, then host=127.0.0.1
 """
 
@@ -88,7 +88,7 @@ def handle_client(conn, addr, profiles, interval):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="TPMS sensor simulator for UNAGI SDR testing"
+        description="TPMS sensor simulator for Urchin SDR testing"
     )
     parser.add_argument(
         "--port", type=int, default=1234, help="TCP port to listen on (default: 1234)"
