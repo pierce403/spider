@@ -102,6 +102,10 @@ class MainActivity : AppCompatActivity() {
     binding.batteryLowOnly.setOnCheckedChangeListener { _, isChecked ->
       viewModel.setBatteryLowOnly(isChecked)
     }
+
+    bindProtocolToggles()
+    bindProtocolFilterChips()
+
     binding.permissionActionButton.setOnClickListener { handlePrimaryAction() }
 
     lifecycleScope.launch {
@@ -134,12 +138,13 @@ class MainActivity : AppCompatActivity() {
   override fun onStart() {
     super.onStart()
     (application as guru.urchin.UrchinApp).sdrController.registerUsbDetection()
+    viewModel.refreshScan()
     updateUsbSummary()
   }
 
   override fun onStop() {
     (application as guru.urchin.UrchinApp).sdrController.unregisterUsbDetection()
-    viewModel.stopScan()
+    viewModel.pauseScan()
     super.onStop()
   }
 
@@ -233,6 +238,42 @@ class MainActivity : AppCompatActivity() {
       val gain = text?.toString()?.trim()?.takeIf(String::isNotEmpty)?.toIntOrNull()
       SdrPreferences.setGain(this, gain)
       restartIfScanning()
+    }
+  }
+
+  private fun bindProtocolToggles() {
+    val enabled = SdrPreferences.enabledProtocols(this)
+    bindingPrefs = true
+    binding.protocolTpms.isChecked = "tpms" in enabled
+    binding.protocolPocsag.isChecked = "pocsag" in enabled
+    binding.protocolAdsb.isChecked = "adsb" in enabled
+    bindingPrefs = false
+
+    val protocolToggleListener = android.widget.CompoundButton.OnCheckedChangeListener { _, _ ->
+      if (bindingPrefs) return@OnCheckedChangeListener
+      val protocols = mutableSetOf<String>()
+      if (binding.protocolTpms.isChecked) protocols.add("tpms")
+      if (binding.protocolPocsag.isChecked) protocols.add("pocsag")
+      if (binding.protocolAdsb.isChecked) protocols.add("adsb")
+      if (protocols.isEmpty()) protocols.add("tpms")
+      SdrPreferences.setEnabledProtocols(this, protocols)
+      restartIfScanning()
+    }
+    binding.protocolTpms.setOnCheckedChangeListener(protocolToggleListener)
+    binding.protocolPocsag.setOnCheckedChangeListener(protocolToggleListener)
+    binding.protocolAdsb.setOnCheckedChangeListener(protocolToggleListener)
+  }
+
+  private fun bindProtocolFilterChips() {
+    binding.protocolChips.setOnCheckedStateChangeListener { _, checkedIds ->
+      val protocol = when {
+        R.id.chipTpms in checkedIds -> "tpms"
+        R.id.chipPocsag in checkedIds -> "pocsag"
+        R.id.chipAdsb in checkedIds -> "adsb"
+        R.id.chipP25 in checkedIds -> "p25"
+        else -> null
+      }
+      viewModel.setProtocolFilter(protocol)
     }
   }
 

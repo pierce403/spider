@@ -28,6 +28,68 @@
       android:layout_height="1dp"
       android:background="@color/urchin_stroke_soft" />
 
+    <HorizontalScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/urchin_surface"
+      android:paddingStart="12dp"
+      android:paddingEnd="12dp"
+      android:paddingTop="6dp"
+      android:paddingBottom="6dp"
+      android:scrollbars="none">
+
+      <com.google.android.material.chip.ChipGroup
+        android:id="@+id/protocolChips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:singleLine="true"
+        app:singleSelection="true"
+        app:selectionRequired="true">
+
+        <com.google.android.material.chip.Chip
+          android:id="@+id/chipAll"
+          style="@style/Widget.MaterialComponents.Chip.Filter"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:checked="true"
+          android:text="@string/protocol_filter_all" />
+
+        <com.google.android.material.chip.Chip
+          android:id="@+id/chipTpms"
+          style="@style/Widget.MaterialComponents.Chip.Filter"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/protocol_filter_tpms" />
+
+        <com.google.android.material.chip.Chip
+          android:id="@+id/chipPocsag"
+          style="@style/Widget.MaterialComponents.Chip.Filter"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/protocol_filter_pocsag" />
+
+        <com.google.android.material.chip.Chip
+          android:id="@+id/chipAdsb"
+          style="@style/Widget.MaterialComponents.Chip.Filter"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/protocol_filter_adsb" />
+
+        <com.google.android.material.chip.Chip
+          android:id="@+id/chipP25"
+          style="@style/Widget.MaterialComponents.Chip.Filter"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/protocol_filter_p25" />
+
+      </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:background="@color/urchin_stroke_soft" />
+
     <FrameLayout
       android:layout_width="match_parent"
       android:layout_height="0dp"
@@ -224,6 +286,39 @@
           android:inputType="number"
           android:textColor="@color/urchin_on_surface" />
       </com.google.android.material.textfield.TextInputLayout>
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/protocols_label"
+        android:textColor="@color/urchin_secondary"
+        android:textStyle="bold" />
+
+      <CheckBox
+        android:id="@+id/protocolTpms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:text="@string/protocol_tpms"
+        android:textColor="@color/urchin_on_surface" />
+
+      <CheckBox
+        android:id="@+id/protocolPocsag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/protocol_pocsag"
+        android:textColor="@color/urchin_on_surface" />
+
+      <CheckBox
+        android:id="@+id/protocolAdsb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/protocol_adsb"
+        android:textColor="@color/urchin_on_surface" />
 
       <View
         android:layout_width="match_parent"

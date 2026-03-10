@@ -19,16 +19,16 @@ class ObservationRecorder(
     }
     val metadata = buildMetadataJson(input)
     DebugLog.log(
-      "Observation ${input.source} sensor=${input.tpmsSensorId ?: "unknown"} protocol=${input.tpmsModel ?: "n/a"} " +
-        "rssi=${input.rssi}"
+      "Observation ${input.source} protocol=${input.protocolType ?: "unknown"} rssi=${input.rssi}"
     )
     val observation = DeviceObservation(
       deviceKey = key,
       name = input.name,
-      address = input.tpmsSensorId ?: input.address,
+      address = input.tpmsSensorId ?: input.pocsagCapCode ?: input.adsbIcao ?: input.p25UnitId ?: input.address,
       rssi = input.rssi,
       timestamp = input.timestamp,
-      metadataJson = metadata
+      metadataJson = metadata,
+      protocolType = input.protocolType
     )
 
     scope.launch {
@@ -56,6 +56,9 @@ class ObservationRecorder(
     input.classificationEvidence.forEach { classificationEvidence.put(it) }
     json.put("classificationEvidence", classificationEvidence)
 
+    json.putIfNotNull("protocolType", input.protocolType)
+
+    // TPMS fields
     json.putIfNotNull("tpmsModel", input.tpmsModel)
     json.putIfNotNull("tpmsSensorId", input.tpmsSensorId)
     json.putIfNotNull("tpmsPressureKpa", input.tpmsPressureKpa)
@@ -63,6 +66,29 @@ class ObservationRecorder(
     json.putIfNotNull("tpmsBatteryOk", input.tpmsBatteryOk)
     json.putIfNotNull("tpmsFrequencyMhz", input.tpmsFrequencyMhz)
     json.putIfNotNull("tpmsSnr", input.tpmsSnr)
+
+    // POCSAG fields
+    json.putIfNotNull("pocsagCapCode", input.pocsagCapCode)
+    json.putIfNotNull("pocsagFunctionCode", input.pocsagFunctionCode)
+    json.putIfNotNull("pocsagMessage", input.pocsagMessage)
+
+    // ADS-B fields
+    json.putIfNotNull("adsbIcao", input.adsbIcao)
+    json.putIfNotNull("adsbCallsign", input.adsbCallsign)
+    json.putIfNotNull("adsbAltitude", input.adsbAltitude)
+    json.putIfNotNull("adsbSpeed", input.adsbSpeed)
+    json.putIfNotNull("adsbHeading", input.adsbHeading)
+    json.putIfNotNull("adsbLat", input.adsbLat)
+    json.putIfNotNull("adsbLon", input.adsbLon)
+    json.putIfNotNull("adsbSquawk", input.adsbSquawk)
+
+    // P25 fields
+    json.putIfNotNull("p25UnitId", input.p25UnitId)
+    json.putIfNotNull("p25Nac", input.p25Nac)
+    json.putIfNotNull("p25Wacn", input.p25Wacn)
+    json.putIfNotNull("p25SystemId", input.p25SystemId)
+    json.putIfNotNull("p25TalkGroupId", input.p25TalkGroupId)
+
     json.putIfNotNull("rawJson", input.rawJson)
 
     return json.toString(2)

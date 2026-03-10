@@ -9,10 +9,10 @@
   <string name="scan_active">Scanning</string>
   <string name="scan_waiting">Waiting for SDR</string>
   <string name="scan_error">Capture issue</string>
-  <string name="scan_idle_detail">Pick a source, tune 315 or 433.92 MHz, and start listening for TPMS traffic.</string>
-  <string name="scan_active_detail">Streaming rtl_433 data over %1$s.</string>
+  <string name="scan_idle_detail">Pick a source, enable protocols, and start listening.</string>
+  <string name="scan_active_detail">Streaming SDR data over %1$s.</string>
   <string name="retry_scan">Retry capture</string>
-  <string name="no_devices">No TPMS sensors observed yet.</string>
+  <string name="no_devices">No devices observed yet.</string>
   <string name="source_label">Source</string>
   <string name="usb_source_label">USB dongle</string>
   <string name="network_source_label">Network bridge</string>
@@ -61,4 +61,15 @@
   <string name="copied_to_clipboard_simple">Copied to clipboard.</string>
   <string name="star_device">Star sensor</string>
   <string name="unstar_device">Unstar sensor</string>
+  <string name="protocols_label">Protocols</string>
+  <string name="protocol_tpms">TPMS (315/433 MHz)</string>
+  <string name="protocol_pocsag">POCSAG Pager (929 MHz)</string>
+  <string name="protocol_adsb">ADS-B Aircraft (1090 MHz)</string>
+  <string name="protocol_filter_all">All</string>
+  <string name="protocol_filter_tpms">TPMS</string>
+  <string name="protocol_filter_pocsag">Pager</string>
+  <string name="protocol_filter_adsb">Aircraft</string>
+  <string name="protocol_filter_p25">P25</string>
+  <string name="protocol_p25">P25 Radio (136-800 MHz)</string>
+  <string name="p25_network_port">OP25 metadata port (default 23456)</string>
 </resources>
