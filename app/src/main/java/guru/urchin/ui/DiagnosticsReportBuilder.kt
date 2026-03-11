@@ -9,7 +9,9 @@ object DiagnosticsReportBuilder {
     sdrState: SdrState,
     diagnostics: ScanDiagnosticsSnapshot,
     deviceCount: Int,
-    logEntries: List<String>
+    logEntries: List<String>,
+    usbInventoryLines: List<String> = emptyList(),
+    nativeToolLines: List<String> = emptyList()
   ): String {
     return buildString {
       val guidance = setupGuidance(sdrState, diagnostics)
@@ -33,6 +35,16 @@ object DiagnosticsReportBuilder {
       appendLine("Raw observations: ${diagnostics.rawCallbackCount}")
       appendLine("Last reading: ${diagnostics.lastReadingAt?.let(Formatters::formatTimestamp) ?: "none"}")
       appendLine("Last error: ${diagnostics.lastError ?: "none"}")
+      if (usbInventoryLines.isNotEmpty()) {
+        appendLine()
+        appendLine("USB inventory")
+        usbInventoryLines.forEach(::appendLine)
+      }
+      if (nativeToolLines.isNotEmpty()) {
+        appendLine()
+        appendLine("Native tools")
+        nativeToolLines.forEach(::appendLine)
+      }
       appendLine()
       appendLine("Recent log")
       logEntries.takeLast(40).forEach(::appendLine)
@@ -68,8 +80,8 @@ object DiagnosticsReportBuilder {
       is SdrState.Error -> {
         val msg = state.message
         val hint = when {
-          "not found" in msg || "binary" in msg.lowercase() ->
-            "→ The rtl_433 or dump1090 binary was not found. See the rtl_433 Android setup guide."
+          "not bundled" in msg.lowercase() || "not found" in msg.lowercase() || "binary" in msg.lowercase() ->
+            "→ The required native capture binary is missing from this APK. See the rtl_433 Android setup guide and the Native tools section below."
           "permission" in msg.lowercase() ->
             "→ Check that USB permission was granted and retry."
           "connect" in msg.lowercase() || "refused" in msg.lowercase() ->

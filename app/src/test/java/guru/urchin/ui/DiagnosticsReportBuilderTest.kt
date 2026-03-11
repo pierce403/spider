@@ -76,6 +76,22 @@ class DiagnosticsReportBuilderTest {
     assertTrue(report.contains("State:"))
   }
 
+  @Test
+  fun `report includes usb inventory and native tools sections when provided`() {
+    val report = DiagnosticsReportBuilder.build(
+      sdrState = SdrState.Idle,
+      diagnostics = snapshot(),
+      deviceCount = 0,
+      logEntries = emptyList(),
+      usbInventoryLines = listOf("RTL-SDR: Test dongle (permission=granted)"),
+      nativeToolLines = listOf("rtl_433: missing (expected /data/app/lib/librtl_433.so)")
+    )
+    assertTrue(report.contains("USB inventory"))
+    assertTrue(report.contains("Test dongle"))
+    assertTrue(report.contains("Native tools"))
+    assertTrue(report.contains("rtl_433: missing"))
+  }
+
   private fun build(state: SdrState, diagnostics: ScanDiagnosticsSnapshot): String {
     return DiagnosticsReportBuilder.build(
       sdrState = state,

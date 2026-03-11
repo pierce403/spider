@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import guru.urchin.UrchinApp
 import guru.urchin.databinding.ActivityDiagnosticsBinding
 import guru.urchin.scan.ScanDiagnosticsStore
+import guru.urchin.sdr.SdrRuntimeInspector
 import guru.urchin.util.DebugLog
 import guru.urchin.util.WindowInsetsHelper
 
@@ -48,7 +49,9 @@ class DiagnosticsActivity : AppCompatActivity() {
             sdrState = sdrState,
             diagnostics = diagnostics,
             deviceCount = devices.size,
-            logEntries = logs
+            logEntries = logs,
+            usbInventoryLines = SdrRuntimeInspector.usbInventoryLines(this@DiagnosticsActivity),
+            nativeToolLines = SdrRuntimeInspector.nativeToolLines(this@DiagnosticsActivity)
           )
         }.collect { report ->
           binding.diagnosticsText.text = report

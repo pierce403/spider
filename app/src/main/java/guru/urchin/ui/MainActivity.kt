@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import guru.urchin.R
 import guru.urchin.databinding.ActivityMainBinding
 import guru.urchin.sdr.SdrPreferences
+import guru.urchin.sdr.SdrRuntimeInspector
 import guru.urchin.sdr.SdrState
 import guru.urchin.sdr.SdrUsbDetector
 import guru.urchin.util.AppVersion
@@ -348,11 +349,28 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun updateUsbSummary() {
+    val source = SdrPreferences.source(this)
     val device = SdrUsbDetector.findSdrDevice(this)
+    val missingTools = SdrRuntimeInspector.missingRequiredToolLabels(
+      this,
+      SdrPreferences.enabledProtocols(this)
+    )
     binding.hardwareSummary.text = when {
+      source == SdrPreferences.SdrSource.NETWORK -> getString(R.string.network_bridge_summary)
+      device != null && missingTools != null -> getString(
+        R.string.usb_detected_missing_tools_summary,
+        SdrUsbDetector.deviceDescription(device.usbDevice),
+        missingTools
+      )
       device != null -> SdrUsbDetector.deviceDescription(device.usbDevice)
-      SdrPreferences.source(this) == SdrPreferences.SdrSource.USB ->
-        getString(R.string.usb_waiting_summary)
+      source == SdrPreferences.SdrSource.USB -> {
+        val unsupported = SdrRuntimeInspector.firstUnsupportedUsbSummary(this)
+        if (unsupported != null) {
+          getString(R.string.usb_unsupported_summary, unsupported)
+        } else {
+          getString(R.string.usb_waiting_summary)
+        }
+      }
       else -> getString(R.string.network_bridge_summary)
     }
   }

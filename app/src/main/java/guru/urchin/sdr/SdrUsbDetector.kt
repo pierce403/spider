@@ -48,8 +48,7 @@ object SdrUsbDetector {
   )
 
   fun findSdrDevice(context: Context): SupportedSdrDevice? {
-    val usbManager = context.getSystemService(Context.USB_SERVICE) as? UsbManager ?: return null
-    return usbManager.deviceList.values.firstOrNull { device ->
+    return findAllUsbDevices(context).firstOrNull { device ->
       profileFor(device) != null
     }?.let { device ->
       SupportedSdrDevice(
@@ -60,13 +59,21 @@ object SdrUsbDetector {
   }
 
   fun findAllSdrDevices(context: Context): List<SupportedSdrDevice> {
-    val usbManager = context.getSystemService(Context.USB_SERVICE) as? UsbManager
-      ?: return emptyList()
-    return usbManager.deviceList.values.mapNotNull { device ->
+    return findAllUsbDevices(context).mapNotNull { device ->
       profileFor(device)?.let { profile ->
         SupportedSdrDevice(usbDevice = device, profile = profile)
       }
     }
+  }
+
+  fun findAllUsbDevices(context: Context): List<UsbDevice> {
+    val usbManager = context.getSystemService(Context.USB_SERVICE) as? UsbManager
+      ?: return emptyList()
+    return usbManager.deviceList.values.sortedWith(
+      compareBy<UsbDevice> { it.vendorId }
+        .thenBy { it.productId }
+        .thenBy { it.productName.orEmpty() }
+    )
   }
 
   fun hasPermission(context: Context, device: UsbDevice): Boolean {
@@ -95,21 +102,25 @@ object SdrUsbDetector {
         when (intent.action) {
           UsbManager.ACTION_USB_DEVICE_ATTACHED -> {
             val device = usbDeviceFromIntent(intent) ?: return
-            if (profileFor(device) != null) {
-              DebugLog.log("SDR USB device attached")
+            val supported = profileFor(device) != null
+            DebugLog.log("USB device attached: ${usbEventDescription(device)} supported=$supported")
+            if (supported) {
               onAttached()
             }
           }
           UsbManager.ACTION_USB_DEVICE_DETACHED -> {
             val device = usbDeviceFromIntent(intent) ?: return
-            if (profileFor(device) != null) {
-              DebugLog.log("SDR USB device detached")
+            val supported = profileFor(device) != null
+            DebugLog.log("USB device detached: ${usbEventDescription(device)} supported=$supported")
+            if (supported) {
               onDetached()
             }
           }
           ACTION_USB_PERMISSION -> {
             val granted = intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)
-            DebugLog.log("SDR USB permission result: granted=$granted")
+            val device = usbDeviceFromIntent(intent)
+            val target = device?.let(::usbEventDescription) ?: "unknown device"
+            DebugLog.log("SDR USB permission result for $target: granted=$granted")
             onPermissionResult(granted)
           }
         }
@@ -143,6 +154,10 @@ object SdrUsbDetector {
     }
   }
 
+  fun isSupported(device: UsbDevice): Boolean = profileFor(device) != null
+
+  fun supportLabel(device: UsbDevice): String? = profileFor(device)?.label
+
   fun hardwareLabel(device: UsbDevice?): String? {
     if (device == null) return null
     return profileFor(device)?.label
@@ -161,5 +176,10 @@ object SdrUsbDetector {
       @Suppress("DEPRECATION")
       intent.getParcelableExtra(UsbManager.EXTRA_DEVICE)
     }
+  }
+
+  private fun usbEventDescription(device: UsbDevice): String {
+    val product = device.productName ?: device.manufacturerName ?: "Unknown device"
+    return "$product (vendor=0x${"%04X".format(device.vendorId)}, product=0x${"%04X".format(device.productId)})"
   }
 }

@@ -25,6 +25,7 @@ The project landing page is intended for `https://urchin.guru/`.
 
 - JDK 17
 - Android SDK with API 35
+- `./scripts/setup-third-party.sh` before `./gradlew assembleDebug` when you need USB/on-device SDR binaries
 - `./gradlew assembleDebug`
 - `./gradlew installDebug`
 - `./gradlew testDebugUnitTest`
@@ -52,6 +53,7 @@ See [docs/EMULATOR_SETUP.md](docs/EMULATOR_SETUP.md) for creating an AVD, launch
 ## SDR notes
 
 - USB mode auto-detects supported hardware by VID/PID (RTL2832U dongles and HackRF One).
+- Diagnostics includes the live USB inventory with VID/PID/permission state plus the packaged native-tool paths for `rtl_433`, `dump1090`, and `p25_scanner`.
 - When multiple USB SDR devices are connected, Urchin assigns one dongle per frequency. With a single dongle, it uses frequency hopping.
 - Network mode connects to per-protocol bridges on configurable ports. A Raspberry Pi running [sdr-pi](https://github.com/ingmarvg/sdr-pi) can host your SDR dongles and stream observation data to the app over TCP:
 

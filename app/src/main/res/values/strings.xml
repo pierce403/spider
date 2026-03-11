@@ -32,6 +32,8 @@
   <string name="version_label">Version</string>
   <string name="live_sensor_count">%1$d live sensors</string>
   <string name="usb_waiting_summary">USB mode is selected. Connect an RTL-SDR or HackRF to capture locally on-device.</string>
+  <string name="usb_detected_missing_tools_summary">%1$s&#10;Missing in this APK: %2$s. Open Diagnostics or use Network bridge.</string>
+  <string name="usb_unsupported_summary">USB attached but unsupported: %1$s. Open Diagnostics for full VID/PID details.</string>
   <string name="network_bridge_summary">Network mode expects newline-delimited rtl_433 JSON over TCP.</string>
   <string name="usb_missing_detail">No supported USB SDR detected. Connect an RTL-SDR or HackRF, or switch to the network bridge.</string>
   <string name="usb_permission_denied_detail">USB access was denied. Retry the scan and approve the USB permission prompt.</string>

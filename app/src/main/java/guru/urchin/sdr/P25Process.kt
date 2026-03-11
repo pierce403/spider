@@ -9,7 +9,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import guru.urchin.util.DebugLog
 import java.io.BufferedReader
-import java.io.File
 import java.io.InputStreamReader
 
 class P25Process(private val context: Context) {
@@ -26,10 +25,11 @@ class P25Process(private val context: Context) {
     onError: (String) -> Unit
   ) {
     stop()
-    val binary = resolveBinary()
-    if (!binary.exists()) {
-      DebugLog.log("p25_scanner binary not found at ${binary.absolutePath}", level = android.util.Log.ERROR)
-      onError("P25 scanner binary not found. NDK build required.")
+    val status = SdrRuntimeInspector.p25ScannerStatus(context)
+    val binary = status.resolvedFile
+    if (!status.exists) {
+      DebugLog.log(status.missingMessage(), level = android.util.Log.ERROR)
+      onError(status.missingMessage())
       return
     }
 
@@ -101,13 +101,4 @@ class P25Process(private val context: Context) {
         true
       }
     }
-
-  private fun resolveBinary(): File {
-    val nativeDir = File(context.applicationInfo.nativeLibraryDir)
-    val candidates = listOf(
-      File(nativeDir, "libp25_scanner.so"),
-      File(nativeDir, "p25_scanner")
-    )
-    return candidates.firstOrNull(File::exists) ?: candidates.first()
-  }
 }

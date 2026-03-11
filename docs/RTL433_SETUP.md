@@ -49,6 +49,12 @@ the app's native library directory:
 The native library directory is under `/data/app/guru.urchin-*/lib/<abi>/` and is not directly
 user-writable; the binary must be bundled in the APK.
 
+Before building an APK that should support USB mode locally, populate the SDR sources with:
+
+```
+./scripts/setup-third-party.sh
+```
+
 ### Option A: NDK build (advanced)
 
 Build rtl_433 and its dependencies for Android:
@@ -141,6 +147,8 @@ through all enabled frequencies.
 Open **Diagnostics** from the Urchin menu to see:
 - Current state (idle / scanning / error)
 - Hardware detected
+- Live USB inventory with VID/PID and permission state, including unsupported devices
+- Native-tool packaging status for `rtl_433`, `dump1090`, and `p25_scanner`
 - rtl_433 callback count and last reading timestamp
 - Per-state setup guidance
 

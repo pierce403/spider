@@ -9,7 +9,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import guru.urchin.util.DebugLog
 import java.io.BufferedReader
-import java.io.File
 import java.io.InputStreamReader
 
 class Rtl433Process(private val context: Context) {
@@ -26,10 +25,11 @@ class Rtl433Process(private val context: Context) {
     onError: (String) -> Unit
   ) {
     stop()
-    val binary = resolveBinary()
-    if (!binary.exists()) {
-      DebugLog.log("rtl_433 binary not found at ${binary.absolutePath}", level = android.util.Log.ERROR)
-      onError("rtl_433 binary not found. NDK build required.")
+    val status = SdrRuntimeInspector.rtl433Status(context)
+    val binary = status.resolvedFile
+    if (!status.exists) {
+      DebugLog.log(status.missingMessage(), level = android.util.Log.ERROR)
+      onError(status.missingMessage())
       return
     }
 
@@ -107,13 +107,4 @@ class Rtl433Process(private val context: Context) {
         true // Process is still running
       }
     }
-
-  private fun resolveBinary(): File {
-    val nativeDir = File(context.applicationInfo.nativeLibraryDir)
-    val candidates = listOf(
-      File(nativeDir, "librtl_433.so"),
-      File(nativeDir, "rtl_433")
-    )
-    return candidates.firstOrNull(File::exists) ?: candidates.first()
-  }
 }

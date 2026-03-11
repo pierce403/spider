@@ -25,10 +25,11 @@ class Dump1090Process(private val context: Context) {
     onError: (String) -> Unit
   ) {
     stop()
-    val binary = resolveBinary()
-    if (!binary.exists()) {
-      DebugLog.log("dump1090 binary not found at ${binary.absolutePath}", level = android.util.Log.ERROR)
-      onError("dump1090 binary not found. NDK build required.")
+    val status = SdrRuntimeInspector.dump1090Status(context)
+    val binary = status.resolvedFile
+    if (!status.exists) {
+      DebugLog.log(status.missingMessage(), level = android.util.Log.ERROR)
+      onError(status.missingMessage())
       return
     }
 
@@ -100,15 +101,6 @@ class Dump1090Process(private val context: Context) {
       } catch (_: IllegalThreadStateException) {
         true
       }
-    }
-
-  private fun resolveBinary(): java.io.File {
-    val nativeDir = java.io.File(context.applicationInfo.nativeLibraryDir)
-    val candidates = listOf(
-      java.io.File(nativeDir, "libdump1090.so"),
-      java.io.File(nativeDir, "dump1090")
-    )
-    return candidates.firstOrNull(java.io.File::exists) ?: candidates.first()
   }
 }
 
