@@ -82,7 +82,7 @@ class DeviceAlertNotifier(
     val message = "${match.reason} \u2022 $idPart \u2022 $protoPart"
 
     val notification = NotificationCompat.Builder(appContext, CHANNEL_ID)
-      .setSmallIcon(R.drawable.ic_launcher_foreground)
+      .setSmallIcon(R.drawable.ic_unagi_status)
       .setContentTitle(title)
       .setContentText(message)
       .setStyle(NotificationCompat.BigTextStyle().bigText("$message\nSource: ${observation.source}"))

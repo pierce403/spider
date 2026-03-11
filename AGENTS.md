@@ -81,7 +81,7 @@ Build the MVP: scan -> list -> tap -> history.
 - `Continuous scanning` is the persisted background-capable passive mode in `ContinuousScanPreferences`; when it is enabled, scanning should run via `ContinuousScanService` instead of being tied to `MainActivity`
 - Background-capable continuous scanning needs `ACCESS_BACKGROUND_LOCATION` on Android 10/11 plus a `connectedDevice` foreground service notification; keep the permission flow and manifest declarations aligned
 - Continuous scanning now prompts for a battery-optimization exemption from `MainActivity`; keep that prompt tied to the mode enable/start path so users understand why the app may be killed otherwise
-- The foreground-service notification uses `ic_unagi_status`, not the launcher asset, so the status-bar icon stays recognizable and monochrome
+- Foreground-service and alert notifications should both use `ic_unagi_status`, not the launcher asset, so the status-bar icon stays recognizable and monochrome
 - On Android 13+, continuous scanning should request `POST_NOTIFICATIONS` from the scan-start flow too; otherwise the foreground-service notice can fall out of the notification drawer even though scanning is still running
 - If the active-scan notification is expected to show a status-bar icon, do not use a low-importance channel; low importance suppresses that icon on modern Android
 - Boot autostart is now controlled by `StartOnBootPreferences` and `ContinuousScanBootReceiver`; only restart the service on `BOOT_COMPLETED` when both continuous scanning and start-on-boot are enabled
@@ -108,6 +108,7 @@ Build the MVP: scan -> list -> tap -> history.
 - `bash scripts/setup-third-party.sh` now needs to run before `./gradlew assembleDebug`; it clones or reuses the SDR deps, reapplies tracked Android patches (currently `rtl-sdr-android-usb-fd.patch`), and the tracked `third_party/CMakeLists.txt` bridges them into a buildable native tree
 - `rtl_433` now ships as an APK asset at `assets/sdr-bin/<abi>/rtl_433`; `Rtl433BinaryInstaller` extracts it to `noBackupFilesDir/sdr-bin/rtl_433-v<versionCode>-<abi>` before launch, and the Android wrapper disables upstream rtl_433 tests plus shims `pthread_cancel()` so the executable builds under the NDK
 - Unrooted Android USB capture needed an explicit UsbManager fd relay into `librtlsdr`; `RtlSdrUsbRelay` now duplicates the granted fd into `rtl_433`/`p25_scanner`, and HackRF remains network-bridge-only until a Soapy/USB path is actually bundled
+- Branding assets now live in multiple places: keep `favicon.svg`, `og_image.png`, `index.html`'s header mark, `ic_launcher_foreground.xml`, the legacy launcher vector, and `ic_unagi_status.xml` visually aligned whenever the logo changes
 - The emulator AVD is `unagi_test`; source `scripts/dev-env.sh` to set up PATH and the `start-emulator` helper function
 - `ObservationRecorder` is the shared pipeline for both BLE/Classic (`ScanController`) and SDR (`SdrController`) observations — handles metadata JSON, DB writes, and alert matching in one place
 - Reflection: before handoff, record any new command, pitfall, deploy detail, or collaborator preference discovered during the task

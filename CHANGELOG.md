@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.4 - 2026-03-11
+
+- Replaced the remaining ninja-style branding with a new gold-on-black urchin mark across the Android launcher icon, notification/status icon, website favicon, and site header.
+- Regenerated the website social preview image so link previews now match the Urchin branding instead of the stale `SPIDER` card.
+- Kept the web and app icon family aligned around the same spined urchin silhouette.
+
 ## 0.2.3 - 2026-03-11
 
 - Routed Android UsbManager-granted RTL-SDR access into bundled `rtl_433` and `p25_scanner` subprocesses by relaying an inherited USB file descriptor into `librtlsdr`.
