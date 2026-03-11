@@ -14,6 +14,11 @@ data class SdrChannelConfig(
   val hardwareProfile: SdrHardwareProfile? = null
 )
 
+/**
+ * Abstraction for a single SDR stream. Wraps either a USB [Rtl433Process] subprocess
+ * or a [TcpStreamBridge] TCP connection depending on the configured source.
+ * Used by [SdrController] for multi-dongle assignment.
+ */
 class SdrChannel(
   private val config: SdrChannelConfig,
   private val context: Context

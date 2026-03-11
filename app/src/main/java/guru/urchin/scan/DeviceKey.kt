@@ -2,6 +2,16 @@ package guru.urchin.scan
 
 import java.security.MessageDigest
 
+/**
+ * Generates a stable device identity from an [ObservationInput].
+ *
+ * Checks protocol-specific identifiers in priority order:
+ * ADS-B (ICAO) → POCSAG (CAP+function) → P25 (WACN+system+unit) → TPMS (model+sensor)
+ * → address → name → volatile fallback.
+ *
+ * The resulting token is SHA-256 hashed to a 64-character hex string used as the
+ * primary key in the Room database.
+ */
 object DeviceKey {
   fun from(input: ObservationInput): String {
     val token = when {

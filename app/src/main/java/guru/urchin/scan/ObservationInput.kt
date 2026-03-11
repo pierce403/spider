@@ -1,5 +1,15 @@
 package guru.urchin.scan
 
+/**
+ * Protocol-agnostic union DTO carrying fields from all supported protocols.
+ * Built by per-protocol observation builders and consumed by [ObservationRecorder]
+ * to write into the Room database.
+ *
+ * Field groups: core identity (name, address, rssi, timestamp), legacy BLE
+ * fields (serviceUuids through classificationEvidence), protocol type,
+ * TPMS (tpmsModel–tpmsSnr), POCSAG (pocsagCapCode–pocsagMessage),
+ * ADS-B (adsbIcao–adsbSquawk), P25 (p25UnitId–p25TalkGroupId).
+ */
 data class ObservationInput(
   val name: String?,
   val address: String?,

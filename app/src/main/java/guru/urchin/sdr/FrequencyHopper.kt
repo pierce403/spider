@@ -8,6 +8,12 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import guru.urchin.util.DebugLog
 
+/**
+ * Time-division frequency rotation for single-dongle multi-protocol capture.
+ * Cycles through the configured frequencies, running an [Rtl433Process] at each
+ * one for [dwellTimeMs] (default 5 s) before stopping and tuning to the next.
+ * Falls back to a single persistent process when only one frequency is configured.
+ */
 class FrequencyHopper(
   private val context: Context,
   private val frequencies: List<Int>,

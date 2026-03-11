@@ -11,6 +11,11 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.Socket
 
+/**
+ * Generic TCP line-stream client. Connects to a host:port, reads newline-delimited
+ * text, and passes each line through [parseLine] to produce typed readings.
+ * Used for rtl_433 (TPMS/POCSAG), dump1090 (ADS-B), and OP25 (P25) bridges.
+ */
 class TcpStreamBridge<T>(
   private val label: String,
   private val parseLine: (String) -> T?

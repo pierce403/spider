@@ -7,6 +7,10 @@ import guru.urchin.sdr.optIntOrNull
 import guru.urchin.sdr.optStringOrNull
 import org.json.JSONObject
 
+/**
+ * Deserialized form of `DeviceEntity.lastMetadataJson`. Holds fields for all four
+ * protocols (TPMS, POCSAG, ADS-B, P25) in a flat structure. Parsed by [SensorMetadataParser].
+ */
 data class SensorMetadata(
   val source: String? = null,
   val vendorName: String? = null,
@@ -94,6 +98,11 @@ object SensorMetadataParser {
   }
 }
 
+/**
+ * Builds protocol-aware display data ([SensorPresentation]) from a [DeviceEntity].
+ * Dispatches on `protocolType` to produce per-protocol titles, summaries, detail lines,
+ * and search text for the device list and detail screens.
+ */
 object SensorPresentationBuilder {
   fun build(device: DeviceEntity): SensorPresentation {
     val metadata = SensorMetadataParser.parse(device.lastMetadataJson)

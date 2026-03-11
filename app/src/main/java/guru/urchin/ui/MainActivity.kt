@@ -192,10 +192,6 @@ class MainActivity : AppCompatActivity() {
     val source = SdrPreferences.source(this)
     binding.usbSource.isChecked = source == SdrPreferences.SdrSource.USB
     binding.networkSource.isChecked = source == SdrPreferences.SdrSource.NETWORK
-    when (SdrPreferences.frequencyMhz(this)) {
-      315 -> binding.freq315.isChecked = true
-      else -> binding.freq433.isChecked = true
-    }
     binding.networkHostInput.setText(SdrPreferences.networkHost(this))
     binding.networkPortInput.setText(SdrPreferences.networkPort(this).toString())
     binding.gainInput.setText(SdrPreferences.gain(this)?.toString().orEmpty())
@@ -211,13 +207,6 @@ class MainActivity : AppCompatActivity() {
       }
       SdrPreferences.setSource(this, nextSource)
       updateSourceVisibility(nextSource)
-      restartIfScanning()
-    }
-
-    binding.frequencyGroup.setOnCheckedChangeListener { _, checkedId ->
-      if (bindingPrefs) return@setOnCheckedChangeListener
-      val mhz = if (checkedId == R.id.freq315) 315 else 433
-      SdrPreferences.setFrequencyMhz(this, mhz)
       restartIfScanning()
     }
 
@@ -251,6 +240,15 @@ class MainActivity : AppCompatActivity() {
     binding.protocolTpms.isChecked = "tpms" in enabled
     binding.protocolPocsag.isChecked = "pocsag" in enabled
     binding.protocolAdsb.isChecked = "adsb" in enabled
+    binding.protocolP25.isChecked = "p25" in enabled
+    when (SdrPreferences.frequencyMhz(this)) {
+      315 -> binding.freq315.isChecked = true
+      else -> binding.freq433.isChecked = true
+    }
+    updateP25PortVisibility()
+    updateTpmsFreqVisibility()
+    updateHoppingWarning()
+    binding.p25PortInput.setText(SdrPreferences.p25NetworkPort(this).toString())
     bindingPrefs = false
 
     val protocolToggleListener = android.widget.CompoundButton.OnCheckedChangeListener { _, _ ->
@@ -259,13 +257,60 @@ class MainActivity : AppCompatActivity() {
       if (binding.protocolTpms.isChecked) protocols.add("tpms")
       if (binding.protocolPocsag.isChecked) protocols.add("pocsag")
       if (binding.protocolAdsb.isChecked) protocols.add("adsb")
-      if (protocols.isEmpty()) protocols.add("tpms")
+      if (binding.protocolP25.isChecked) protocols.add("p25")
+      if (protocols.isEmpty()) {
+        protocols.add("tpms")
+        bindingPrefs = true
+        binding.protocolTpms.isChecked = true
+        bindingPrefs = false
+        android.widget.Toast.makeText(this, getString(R.string.protocol_required), android.widget.Toast.LENGTH_SHORT).show()
+      }
       SdrPreferences.setEnabledProtocols(this, protocols)
+      updateP25PortVisibility()
+      updateTpmsFreqVisibility()
+      updateHoppingWarning()
       restartIfScanning()
     }
     binding.protocolTpms.setOnCheckedChangeListener(protocolToggleListener)
     binding.protocolPocsag.setOnCheckedChangeListener(protocolToggleListener)
     binding.protocolAdsb.setOnCheckedChangeListener(protocolToggleListener)
+    binding.protocolP25.setOnCheckedChangeListener(protocolToggleListener)
+
+    binding.tpmsFreqGroup.setOnCheckedChangeListener { _, checkedId ->
+      if (bindingPrefs) return@setOnCheckedChangeListener
+      val mhz = if (checkedId == R.id.freq315) 315 else 433
+      SdrPreferences.setFrequencyMhz(this, mhz)
+      restartIfScanning()
+    }
+
+    binding.p25PortInput.doAfterTextChanged { text ->
+      if (bindingPrefs) return@doAfterTextChanged
+      val port = text?.toString()?.toIntOrNull() ?: return@doAfterTextChanged
+      SdrPreferences.setP25NetworkPort(this, port)
+      restartIfScanning(source = SdrPreferences.SdrSource.NETWORK)
+    }
+  }
+
+  private fun updateP25PortVisibility() {
+    val p25Checked = binding.protocolP25.isChecked
+    val isNetwork = SdrPreferences.source(this) == SdrPreferences.SdrSource.NETWORK
+    binding.p25PortLayout.isVisible = p25Checked && isNetwork
+  }
+
+  private fun updateTpmsFreqVisibility() {
+    val show = binding.protocolTpms.isChecked &&
+      SdrPreferences.source(this) == SdrPreferences.SdrSource.USB
+    binding.tpmsFreqGroup.isVisible = show
+  }
+
+  private fun updateHoppingWarning() {
+    val isUsb = SdrPreferences.source(this) == SdrPreferences.SdrSource.USB
+    var frequencyCount = 0
+    if (binding.protocolTpms.isChecked) frequencyCount++
+    if (binding.protocolPocsag.isChecked) frequencyCount++
+    if (binding.protocolAdsb.isChecked) frequencyCount++
+    // P25 uses its own dongle/binary, excluded from frequency count
+    binding.hoppingWarning.isVisible = isUsb && frequencyCount > 1
   }
 
   private fun bindProtocolFilterChips() {
@@ -283,6 +328,10 @@ class MainActivity : AppCompatActivity() {
 
   private fun updateSourceVisibility(source: SdrPreferences.SdrSource) {
     binding.networkConfigGroup.isVisible = source == SdrPreferences.SdrSource.NETWORK
+    binding.usbHardwareGroup.isVisible = source == SdrPreferences.SdrSource.USB
+    updateP25PortVisibility()
+    updateTpmsFreqVisibility()
+    updateHoppingWarning()
     updateUsbSummary()
   }
 

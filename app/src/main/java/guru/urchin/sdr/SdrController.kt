@@ -12,6 +12,17 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
+/**
+ * Top-level SDR orchestrator. Manages USB and network capture across all protocols.
+ *
+ * In network mode, starts per-protocol TCP bridges (rtl_433 for TPMS/POCSAG,
+ * dump1090 for ADS-B, OP25 for P25) on separate ports. In USB mode, detects
+ * connected dongles and either assigns one per frequency (multi-dongle) or
+ * uses [FrequencyHopper] to time-share a single dongle.
+ *
+ * All parsed readings flow through [handleSdrReading] → [ObservationBuilderRegistry]
+ * → [ObservationRecorder] into the Room database.
+ */
 class SdrController(
   private val context: Context,
   private val scope: CoroutineScope,

@@ -1,5 +1,10 @@
 package guru.urchin.sdr
 
+/**
+ * Parsed output from an SDR source. Each variant corresponds to one radio protocol
+ * and carries the protocol-specific fields extracted by the relevant JSON parser.
+ * Common fields ([rssi], [snr], [frequencyMhz], [rawJson]) are shared across all variants.
+ */
 sealed class SdrReading {
   abstract val rssi: Double?
   abstract val snr: Double?

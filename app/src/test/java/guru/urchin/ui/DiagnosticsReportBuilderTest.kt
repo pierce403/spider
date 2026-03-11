@@ -72,7 +72,7 @@ class DiagnosticsReportBuilderTest {
   @Test
   fun `report always contains diagnostics section`() {
     val report = build(SdrState.Idle, snapshot())
-    assertTrue(report.contains("Spider diagnostics"))
+    assertTrue(report.contains("Urchin diagnostics"))
     assertTrue(report.contains("State:"))
   }
 

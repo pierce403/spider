@@ -3,6 +3,11 @@ package guru.urchin.data
 import androidx.room.withTransaction
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * Central data access for devices and sightings. [recordObservation] upserts the
+ * device, inserts a sighting row on new sighting windows, and prunes old data
+ * using per-protocol retention periods (ADS-B 7 days, P25 14 days, others 30 days).
+ */
 class DeviceRepository(
   private val database: AppDatabase,
   private val deviceDao: DeviceDao,

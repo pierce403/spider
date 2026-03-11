@@ -1,7 +1,12 @@
 cmake_minimum_required(VERSION 3.22.1)
-project(dump1090 C)
+project(urchin_native C)
 
 set(CMAKE_C_STANDARD 11)
+
+# --- Third-party SDR libraries (libusb, librtlsdr, rtl_433) ---
+set(THIRD_PARTY_DIR ${CMAKE_SOURCE_DIR}/../../../../third_party)
+get_filename_component(THIRD_PARTY_DIR ${THIRD_PARTY_DIR} ABSOLUTE)
+add_subdirectory(${THIRD_PARTY_DIR} ${CMAKE_CURRENT_BINARY_DIR}/third_party)
 
 # ABI-specific DSP flavors and starch mix define
 if(ANDROID_ABI STREQUAL "arm64-v8a")
@@ -83,12 +88,13 @@ add_library(p25_scanner SHARED
 
 target_include_directories(p25_scanner PRIVATE
     ${CMAKE_SOURCE_DIR}/p25
+    ${THIRD_PARTY_DIR}/rtl-sdr/include
+    ${THIRD_PARTY_DIR}/libusb/libusb
 )
 
 target_compile_definitions(p25_scanner PRIVATE
     ANDROID
-    # Define ENABLE_RTLSDR when librtlsdr is available for NDK build
-    # ENABLE_RTLSDR
+    ENABLE_RTLSDR
 )
 
-target_link_libraries(p25_scanner log m)
+target_link_libraries(p25_scanner rtlsdr_static usb1 log m)

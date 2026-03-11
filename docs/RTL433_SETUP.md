@@ -1,7 +1,15 @@
-# rtl_433 Android Setup
+# SDR Setup
 
-Spider can receive TPMS and POCSAG via **rtl_433**. Two modes are supported: Network (easiest)
-and USB (on-device). ADS-B uses **dump1090**, which is bundled in the APK.
+Spider receives four protocols using different tools. Each protocol connects on its own
+network port when in bridge mode:
+
+| Protocol | Tool | Default port |
+| -------- | ---- | ------------ |
+| TPMS / POCSAG | rtl_433 | 1234 |
+| ADS-B | dump1090 | 30003 |
+| P25 | OP25 | 23456 |
+
+Two capture modes are supported: **Network** (easiest) and **USB** (on-device).
 
 ---
 
@@ -38,7 +46,7 @@ the app's native library directory:
 - `<nativeLibraryDir>/librtl_433.so`  ← preferred (packaged as NDK library)
 - `<nativeLibraryDir>/rtl_433`         ← fallback
 
-The native library directory is under `/data/app/ninja.spider-*/lib/<abi>/` and is not directly
+The native library directory is under `/data/app/guru.urchin-*/lib/<abi>/` and is not directly
 user-writable; the binary must be bundled in the APK.
 
 ### Option A: NDK build (advanced)
@@ -81,6 +89,34 @@ For reference only:
 pkg install rtl-433
 # Binary is at /data/data/com.termux/files/usr/bin/rtl_433
 ```
+
+---
+
+## P25 / OP25 setup
+
+Spider connects to an OP25 instance for P25 digital radio metadata. Two modes are supported:
+
+**TCP stream** (default port 23456): OP25 sends newline-delimited JSON with unit IDs, NAC,
+WACN, system ID, and talk group data. Configure the host and port in Spider's settings.
+
+**HTTP polling**: Spider can poll OP25's JSON status endpoint for active unit lists. This is
+used when the OP25 instance exposes an HTTP API instead of a raw TCP stream.
+
+In Spider, enable the P25 protocol toggle and set the P25 network port in the filter panel.
+
+---
+
+## Multi-dongle configuration
+
+When multiple USB SDR devices are connected, Spider assigns one dongle per frequency.
+For example, with two dongles and three protocols enabled (TPMS + POCSAG + ADS-B), one
+dongle handles TPMS while the other handles ADS-B. Remaining frequencies time-share via
+the frequency hopper.
+
+P25 over USB requires its own dedicated dongle when running alongside other protocols.
+
+With a single dongle, Spider uses frequency hopping (default 5-second dwell) to cycle
+through all enabled frequencies.
 
 ---
 

@@ -2,6 +2,7 @@ package guru.urchin.sdr
 
 import guru.urchin.scan.ObservationInput
 
+/** Dispatches [SdrReading] sealed variants to the appropriate protocol-specific observation builder. */
 object ObservationBuilderRegistry {
   fun build(reading: SdrReading): ObservationInput = when (reading) {
     is SdrReading.Tpms -> TpmsObservationBuilder.build(reading)
