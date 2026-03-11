@@ -67,6 +67,7 @@ Build the MVP: scan -> list -> tap -> history.
 - Deployment: GitHub Pages publishes from `main` at repo root to `https://urchin.guru`
 - Site artifacts: keep `index.html`, the current versioned APK in `downloads/`, and `CNAME` aligned when shipping landing-page changes
 - On every release, run `scripts/stage-apk` so the staged APK filename includes the current version and the website download links are updated before commit/push
+- Collaborator preference: any app change that adds user-visible behavior should be treated as a release trigger; bump `versionCode`/`versionName`, publish the staged APK/site updates, and do not defer release chores to a later cleanup pass
 - Vendor-prefix data is refreshed with `scripts/update-vendor-prefixes`, which writes `app/src/main/assets/vendor_prefixes.txt.gz`
 - Bluetooth SIG assigned-number data is refreshed with `scripts/update-bluetooth-assigned-numbers`, which writes `app/src/main/assets/bluetooth_company_identifiers.txt.gz` and `app/src/main/assets/bluetooth_service_uuids.txt.gz`
 - When unnamed BLE devices still lack a human name, prefer surfacing manufacturer-company IDs and advertised service UUID labels rather than leaving the UI at a bare “Unknown device”
