@@ -1,6 +1,6 @@
 # SDR Setup
 
-Spider receives four protocols using different tools. Each protocol connects on its own
+Urchin receives four protocols using different tools. Each protocol connects on its own
 network port when in bridge mode:
 
 | Protocol | Tool | Default port |
@@ -21,7 +21,7 @@ Run rtl_433 on any host reachable from the Android device (laptop, Raspberry Pi,
 rtl_433 -F json -S 0 -M level
 ```
 
-Then in Spider:
+Then in Urchin:
 
 1. Open the filter panel (hamburger icon).
 2. Select **Network bridge** as the source.
@@ -40,7 +40,7 @@ adb forward tcp:1234 tcp:1234   # if testing on a physical device
 
 ## Mode 2: USB on-device
 
-Spider launches `rtl_433` as a subprocess when USB mode is selected. The binary is expected in
+Urchin launches `rtl_433` as a subprocess when USB mode is selected. The binary is expected in
 the app's native library directory:
 
 - `<nativeLibraryDir>/librtl_433.so`  ← preferred (packaged as NDK library)
@@ -60,7 +60,7 @@ Build rtl_433 and its dependencies for Android:
 
 **Steps (arm64-v8a target):**
 
-1. Set up NDK 27+ (already included in the Spider build):
+1. Set up NDK 27+ (already included in the Urchin build):
 
     ```
     export ANDROID_NDK=$ANDROID_SDK_ROOT/ndk/27.2.12479018
@@ -79,7 +79,7 @@ Build rtl_433 and its dependencies for Android:
 ### Option B: Termux-assisted sideload (development/testing only)
 
 This approach works on rooted or developer devices. It does **not** make the binary available
-to Spider's subprocess launcher because Android blocks execution from user-writable paths on
+to Urchin's subprocess launcher because Android blocks execution from user-writable paths on
 non-rooted devices.
 
 For reference only:
@@ -94,28 +94,28 @@ pkg install rtl-433
 
 ## P25 / OP25 setup
 
-Spider connects to an OP25 instance for P25 digital radio metadata. Two modes are supported:
+Urchin connects to an OP25 instance for P25 digital radio metadata. Two modes are supported:
 
 **TCP stream** (default port 23456): OP25 sends newline-delimited JSON with unit IDs, NAC,
-WACN, system ID, and talk group data. Configure the host and port in Spider's settings.
+WACN, system ID, and talk group data. Configure the host and port in Urchin's settings.
 
-**HTTP polling**: Spider can poll OP25's JSON status endpoint for active unit lists. This is
+**HTTP polling**: Urchin can poll OP25's JSON status endpoint for active unit lists. This is
 used when the OP25 instance exposes an HTTP API instead of a raw TCP stream.
 
-In Spider, enable the P25 protocol toggle and set the P25 network port in the filter panel.
+In Urchin, enable the P25 protocol toggle and set the P25 network port in the filter panel.
 
 ---
 
 ## Multi-dongle configuration
 
-When multiple USB SDR devices are connected, Spider assigns one dongle per frequency.
+When multiple USB SDR devices are connected, Urchin assigns one dongle per frequency.
 For example, with two dongles and three protocols enabled (TPMS + POCSAG + ADS-B), one
 dongle handles TPMS while the other handles ADS-B. Remaining frequencies time-share via
 the frequency hopper.
 
 P25 over USB requires its own dedicated dongle when running alongside other protocols.
 
-With a single dongle, Spider uses frequency hopping (default 5-second dwell) to cycle
+With a single dongle, Urchin uses frequency hopping (default 5-second dwell) to cycle
 through all enabled frequencies.
 
 ---
@@ -125,7 +125,7 @@ through all enabled frequencies.
 - Pass `-d driver=hackrf` to rtl_433 in network mode.
 - HackRF One covers 1 MHz–6 GHz, so TPMS (315/433 MHz), POCSAG (929 MHz),
   and ADS-B (1090 MHz) are all in range.
-- Single-dongle frequency hopping is handled automatically by Spider when multiple
+- Single-dongle frequency hopping is handled automatically by Urchin when multiple
   protocols are enabled.
 
 ## RTL-SDR notes
@@ -138,7 +138,7 @@ through all enabled frequencies.
 
 ## Diagnostics
 
-Open **Diagnostics** from the Spider menu to see:
+Open **Diagnostics** from the Urchin menu to see:
 - Current state (idle / scanning / error)
 - Hardware detected
 - rtl_433 callback count and last reading timestamp

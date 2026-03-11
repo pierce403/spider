@@ -2,7 +2,7 @@
 """
 Multi-Protocol SDR Simulator — sends rtl_433, dump1090, and OP25-format JSON over TCP.
 
-Simulates TPMS, POCSAG, ADS-B, and P25 traffic for testing Spider's multi-protocol
+Simulates TPMS, POCSAG, ADS-B, and P25 traffic for testing Urchin's multi-protocol
 pipeline without real RF hardware.
 
 Usage:
@@ -13,7 +13,7 @@ Usage:
   python3 scripts/sdr-simulator.py --adsb-port 30003        # separate ADS-B port
   python3 scripts/sdr-simulator.py --p25-port 23456         # separate P25 port
 
-Connect from Spider: source=NETWORK, host=<this-IP>, port=1234
+Connect from Urchin: source=NETWORK, host=<this-IP>, port=1234
 Or use adb forward: adb forward tcp:1234 tcp:1234, then host=127.0.0.1
 
 ADS-B data based on publicly available format from dump1090/readsb.
@@ -316,7 +316,7 @@ def start_server(port, handler, name, *handler_args):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Multi-protocol SDR simulator for Spider testing"
+        description="Multi-protocol SDR simulator for Urchin testing"
     )
     parser.add_argument(
         "--port", type=int, default=1234,
@@ -353,7 +353,7 @@ def main():
     protocols = set(args.protocols)
     servers = []
 
-    print("Spider SDR Simulator")
+    print("Urchin SDR Simulator")
     print(f"  Protocols: {', '.join(sorted(protocols))}")
     print(f"  Interval:  {interval}s {'(burst mode)' if args.burst else ''}")
 

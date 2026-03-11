@@ -97,6 +97,6 @@
   <string name="alert_notification_channel_name">Device Alerts</string>
   <string name="alert_notification_channel_description">Audio and visual alerts when matching SDR devices are observed.</string>
   <string name="notification_permission_title">Notification Permission</string>
-  <string name="notification_permission_detail">Spider needs notification permission to show alert notifications when matching devices are observed.</string>
+  <string name="notification_permission_detail">Urchin needs notification permission to show alert notifications when matching devices are observed.</string>
   <string name="allow_notifications">Allow notifications</string>
 </resources>

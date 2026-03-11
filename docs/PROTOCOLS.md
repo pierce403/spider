@@ -1,6 +1,6 @@
 # Protocol Reference
 
-Spider captures four radio protocols. Each protocol has its own parser, observation builder,
+Urchin captures four radio protocols. Each protocol has its own parser, observation builder,
 device key format, and data retention period.
 
 ## TPMS (Tire Pressure Monitoring System)

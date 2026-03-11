@@ -26,7 +26,7 @@ class MainActivityTest {
 
   @Test
   fun toolbarShowsAppTitle() {
-    onView(withText("Spider SDR")).check(matches(isDisplayed()))
+    onView(withText("Urchin SDR")).check(matches(isDisplayed()))
   }
 
   @Test
