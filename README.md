@@ -156,6 +156,10 @@ The project landing page is at `https://urchin.guru/`.
 - Database key wrapped with Android Keystore
 - Automatic one-time migration from plaintext to encrypted database
 
+## Getting started
+
+See [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md) for a complete walkthrough of installing, configuring, and using all of Urchin's features — including SIGINT analysis, export, alerts, team sharing, and OPSEC — without consulting the source code.
+
 ## Raspberry Pi setup (sdr-pi)
 
 Instead of plugging SDR dongles directly into your phone, you can offload capture to a Raspberry Pi running [sdr-pi](https://github.com/ingmarvg/sdr-pi). The Pi creates a Wi-Fi access point, runs per-protocol decoders, and streams observations to Urchin over TCP.

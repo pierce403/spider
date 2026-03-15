@@ -596,6 +596,10 @@ class SdrController(
       is SdrReading.Zwave -> "SDR zwave home=${reading.homeId} node=${reading.nodeId} " +
         "frame=${reading.frameType}"
       is SdrReading.Sidewalk -> "SDR sidewalk smsn=${reading.smsn} frame=${reading.frameType}"
+      is SdrReading.Dmr -> "SDR dmr radio=${reading.radioId} cc=${reading.colorCode} " +
+        "slot=${reading.slot} tg=${reading.talkGroup}"
+      is SdrReading.Nxdn -> "SDR nxdn unit=${reading.unitId} ran=${reading.ran} " +
+        "tg=${reading.talkGroup}"
     }
     DebugLog.log(logMessage)
     observationRecorder.record(input)

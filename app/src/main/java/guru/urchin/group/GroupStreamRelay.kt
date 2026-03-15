@@ -132,12 +132,12 @@ class GroupStreamRelay(
     val json = JSONObject(String(plaintext))
     return DeviceObservation(
       deviceKey = json.getString("deviceKey"),
-      name = json.optString("name", null),
-      address = json.optString("address", null),
+      name = if (json.has("name")) json.getString("name") else null,
+      address = if (json.has("address")) json.getString("address") else null,
       rssi = json.getInt("rssi"),
       timestamp = json.getLong("timestamp"),
-      metadataJson = json.optString("metadataJson", null),
-      protocolType = json.optString("protocolType", null)
+      metadataJson = if (json.has("metadataJson")) json.getString("metadataJson") else null,
+      protocolType = if (json.has("protocolType")) json.getString("protocolType") else null
     )
   }
 }

@@ -95,7 +95,7 @@ data class AlertMatch(
 )
 
 object AlertRuleInputNormalizer {
-  private val KNOWN_PROTOCOLS = setOf("tpms", "pocsag", "adsb", "uat", "p25", "lorawan", "meshtastic", "wmbus", "zwave", "sidewalk")
+  private val KNOWN_PROTOCOLS = setOf("tpms", "pocsag", "adsb", "uat", "p25", "lorawan", "meshtastic", "wmbus", "zwave", "sidewalk", "dmr", "nxdn")
 
   fun normalize(type: AlertRuleType, rawInput: String): NormalizedAlertRuleInput? {
     val trimmed = rawInput.trim()
@@ -115,6 +115,20 @@ object AlertRuleInputNormalizer {
         val lower = trimmed.lowercase()
         if (lower !in KNOWN_PROTOCOLS) return null
         NormalizedAlertRuleInput(pattern = lower, displayValue = lower)
+      }
+      AlertRuleType.RSSI_THRESHOLD -> {
+        val threshold = trimmed.toIntOrNull() ?: return null
+        NormalizedAlertRuleInput(pattern = "", displayValue = "$threshold dBm")
+      }
+      AlertRuleType.NEW_DEVICE -> {
+        val lower = trimmed.lowercase()
+        if (lower.isNotEmpty() && lower !in KNOWN_PROTOCOLS) return null
+        NormalizedAlertRuleInput(pattern = lower, displayValue = if (lower.isEmpty()) "any protocol" else lower)
+      }
+      AlertRuleType.ABSENCE -> {
+        val minutes = trimmed.toIntOrNull() ?: return null
+        if (minutes <= 0) return null
+        NormalizedAlertRuleInput(pattern = "", displayValue = "$minutes min")
       }
     }
   }
