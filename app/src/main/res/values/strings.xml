@@ -63,6 +63,7 @@
   <string name="star_device">Star sensor</string>
   <string name="unstar_device">Unstar sensor</string>
   <string name="protocols_label">Protocols</string>
+  <string name="protocols_rak_hat_label">RAK2243 HAT (network-only)</string>
   <string name="protocol_tpms">TPMS</string>
   <string name="hopping_warning">With one USB dongle, multiple frequencies are time-shared (5 s each). Fewer protocols = better capture quality.</string>
   <string name="protocol_required">At least one protocol must be enabled.</string>
@@ -75,9 +76,29 @@
   <string name="protocol_filter_adsb">Aircraft</string>
   <string name="protocol_filter_uat">UAT</string>
   <string name="protocol_filter_p25">P25</string>
+  <string name="protocol_filter_lorawan">LoRa</string>
+  <string name="protocol_filter_meshtastic">Mesh</string>
+  <string name="protocol_filter_wmbus">M-Bus</string>
+  <string name="protocol_filter_zwave">Z-Wave</string>
+  <string name="protocol_filter_sidewalk">Sidewalk</string>
   <string name="protocol_p25">P25 Radio (136-800 MHz)</string>
+  <string name="protocol_lorawan">LoRaWAN (900 MHz) · RAK HAT</string>
+  <string name="protocol_meshtastic">Meshtastic (900 MHz) · RAK HAT</string>
+  <string name="protocol_wmbus">Wireless M-Bus (868 MHz) · RAK HAT · EU</string>
+  <string name="protocol_zwave">Z-Wave (908 MHz) · RAK HAT · US</string>
+  <string name="protocol_sidewalk">Sidewalk (900 MHz) · RAK HAT</string>
   <string name="uat_network_port">UAT data port (default 30978)</string>
   <string name="p25_network_port">OP25 metadata port (default 23456)</string>
+  <string name="lorawan_network_port">LoRaWAN port (default 1680)</string>
+  <string name="wmbus_network_port">wM-Bus port (default 1681)</string>
+  <string name="zwave_network_port">Z-Wave port (default 1682)</string>
+  <string name="sidewalk_network_port">Sidewalk port (default 1683)</string>
+
+  <!-- Connection test -->
+  <string name="test_connection">Test connection</string>
+  <string name="testing_connection">Testing\u2026</string>
+  <string name="connection_test_title">Connection test</string>
+  <string name="no_protocols_enabled">No protocols enabled to test.</string>
 
   <!-- Alerts -->
   <string name="alerts">Alerts</string>
@@ -97,7 +118,7 @@
   <string name="alert_rule_deleted">Alert rule deleted.</string>
   <string name="alert_invalid_name">Enter a device name or model to match.</string>
   <string name="alert_invalid_id">Enter a valid sensor ID, ICAO hex, CAP code, or unit ID.</string>
-  <string name="alert_invalid_protocol">Enter a valid protocol: tpms, pocsag, adsb, or p25.</string>
+  <string name="alert_invalid_protocol">Enter a valid protocol: tpms, pocsag, adsb, p25, lorawan, meshtastic, wmbus, zwave, or sidewalk.</string>
   <string name="no_alert_rules">No alert rules yet. Tap + to create one.</string>
   <string name="alert_notification_channel_name">Device Alerts</string>
   <string name="alert_notification_channel_description">Audio and visual alerts when matching SDR devices are observed.</string>
