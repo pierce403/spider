@@ -46,7 +46,7 @@ class ObservationRecorder(
     val observation = DeviceObservation(
       deviceKey = key,
       name = input.name,
-      address = input.tpmsSensorId ?: input.pocsagCapCode ?: input.adsbIcao ?: input.p25UnitId ?: input.address,
+      address = input.tpmsSensorId ?: input.pocsagCapCode ?: input.adsbIcao ?: input.p25UnitId ?: input.loraDevAddr ?: input.meshNodeId ?: input.wmbusSerialNumber ?: input.zwaveHomeId ?: input.sidewalkSmsn ?: input.address,
       rssi = input.rssi,
       timestamp = input.timestamp,
       metadataJson = metadata,
@@ -63,7 +63,7 @@ class ObservationRecorder(
   private fun evaluateAlerts(input: ObservationInput, deviceKey: String) {
     if (alertNotifier == null || alertRules.isEmpty()) return
 
-    val sensorId = input.tpmsSensorId ?: input.adsbIcao ?: input.pocsagCapCode ?: input.p25UnitId
+    val sensorId = input.tpmsSensorId ?: input.adsbIcao ?: input.pocsagCapCode ?: input.p25UnitId ?: input.loraDevAddr ?: input.meshNodeId ?: input.wmbusSerialNumber ?: input.zwaveHomeId ?: input.sidewalkSmsn
     val alertObs = AlertObservation(
       deviceKey = deviceKey,
       displayName = input.name ?: input.tpmsModel ?: input.adsbCallsign,
@@ -133,6 +133,36 @@ class ObservationRecorder(
     json.putIfNotNull("p25Wacn", input.p25Wacn)
     json.putIfNotNull("p25SystemId", input.p25SystemId)
     json.putIfNotNull("p25TalkGroupId", input.p25TalkGroupId)
+
+    // LoRaWAN fields
+    json.putIfNotNull("loraDevAddr", input.loraDevAddr)
+    json.putIfNotNull("loraSpreadingFactor", input.loraSpreadingFactor)
+    json.putIfNotNull("loraCodingRate", input.loraCodingRate)
+    json.putIfNotNull("loraPayloadSize", input.loraPayloadSize)
+    json.putIfNotNull("loraCrcOk", input.loraCrcOk)
+
+    // Meshtastic fields
+    json.putIfNotNull("meshNodeId", input.meshNodeId)
+    json.putIfNotNull("meshDestId", input.meshDestId)
+    json.putIfNotNull("meshPacketId", input.meshPacketId)
+    json.putIfNotNull("meshHopLimit", input.meshHopLimit)
+    json.putIfNotNull("meshHopStart", input.meshHopStart)
+    json.putIfNotNull("meshChannelHash", input.meshChannelHash)
+
+    // Wireless M-Bus fields
+    json.putIfNotNull("wmbusManufacturer", input.wmbusManufacturer)
+    json.putIfNotNull("wmbusSerialNumber", input.wmbusSerialNumber)
+    json.putIfNotNull("wmbusMeterVersion", input.wmbusMeterVersion)
+    json.putIfNotNull("wmbusMeterType", input.wmbusMeterType)
+
+    // Z-Wave fields
+    json.putIfNotNull("zwaveHomeId", input.zwaveHomeId)
+    json.putIfNotNull("zwaveNodeId", input.zwaveNodeId)
+    json.putIfNotNull("zwaveFrameType", input.zwaveFrameType)
+
+    // Amazon Sidewalk fields
+    json.putIfNotNull("sidewalkSmsn", input.sidewalkSmsn)
+    json.putIfNotNull("sidewalkFrameType", input.sidewalkFrameType)
 
     json.putIfNotNull("rawJson", input.rawJson)
 

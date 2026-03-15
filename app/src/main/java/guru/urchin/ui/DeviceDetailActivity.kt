@@ -212,6 +212,41 @@ class DeviceDetailActivity : AppCompatActivity() {
         metadata.p25SystemId?.let { add("System ID: $it") }
         metadata.rssi?.let { add(Formatters.formatRssi(it)) }
       }
+      "lorawan" -> buildList {
+        metadata.loraDevAddr?.let { add("DevAddr: $it") }
+        metadata.loraSpreadingFactor?.let { add("Spreading Factor: $it") }
+        metadata.loraCodingRate?.let { add("Coding Rate: $it") }
+        metadata.loraPayloadSize?.let { add("Payload: $it bytes") }
+        metadata.loraCrcOk?.let { add("CRC: ${if (it) "OK" else "Failed"}") }
+        metadata.rssi?.let { add(Formatters.formatRssi(it)) }
+      }
+      "meshtastic" -> buildList {
+        metadata.meshNodeId?.let { add("Node ID: $it") }
+        metadata.meshDestId?.let { add("Destination: $it") }
+        metadata.meshPacketId?.let { add("Packet ID: $it") }
+        metadata.meshHopLimit?.let { add("Hop Limit: $it") }
+        metadata.meshHopStart?.let { add("Hop Start: $it") }
+        metadata.meshChannelHash?.let { add("Channel Hash: $it") }
+        metadata.rssi?.let { add(Formatters.formatRssi(it)) }
+      }
+      "wmbus" -> buildList {
+        metadata.wmbusManufacturer?.let { add("Manufacturer: $it") }
+        metadata.wmbusSerialNumber?.let { add("Serial Number: $it") }
+        metadata.wmbusMeterVersion?.let { add("Version: $it") }
+        metadata.wmbusMeterType?.let { add("Meter Type: $it") }
+        metadata.rssi?.let { add(Formatters.formatRssi(it)) }
+      }
+      "zwave" -> buildList {
+        metadata.zwaveHomeId?.let { add("Home ID: $it") }
+        metadata.zwaveNodeId?.let { add("Node ID: $it") }
+        metadata.zwaveFrameType?.let { add("Frame Type: $it") }
+        metadata.rssi?.let { add(Formatters.formatRssi(it)) }
+      }
+      "sidewalk" -> buildList {
+        metadata.sidewalkSmsn?.let { add("SMSN: $it") }
+        metadata.sidewalkFrameType?.let { add("Frame Type: $it") }
+        metadata.rssi?.let { add(Formatters.formatRssi(it)) }
+      }
       else -> buildList {
         metadata.tpmsPressureKpa?.let { add(Formatters.formatPressure(it)) }
         metadata.tpmsTemperatureC?.let { add(Formatters.formatTemperature(it)) }

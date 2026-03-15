@@ -14,6 +14,10 @@ object SdrPreferences {
   private const val KEY_ADSB_NETWORK_PORT = "sdr_adsb_network_port"
   private const val KEY_UAT_NETWORK_PORT = "sdr_uat_network_port"
   private const val KEY_P25_NETWORK_PORT = "sdr_p25_network_port"
+  private const val KEY_LORAWAN_NETWORK_PORT = "sdr_lorawan_network_port"
+  private const val KEY_WMBUS_NETWORK_PORT = "sdr_wmbus_network_port"
+  private const val KEY_ZWAVE_NETWORK_PORT = "sdr_zwave_network_port"
+  private const val KEY_SIDEWALK_NETWORK_PORT = "sdr_sidewalk_network_port"
 
   private fun prefs(context: Context) =
     context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -103,6 +107,34 @@ object SdrPreferences {
 
   fun setP25NetworkPort(context: Context, port: Int) {
     prefs(context).edit().putInt(KEY_P25_NETWORK_PORT, port).apply()
+  }
+
+  fun lorawanNetworkPort(context: Context): Int =
+    prefs(context).getInt(KEY_LORAWAN_NETWORK_PORT, 1680)
+
+  fun setLorawanNetworkPort(context: Context, port: Int) {
+    prefs(context).edit().putInt(KEY_LORAWAN_NETWORK_PORT, port).apply()
+  }
+
+  fun wmbusNetworkPort(context: Context): Int =
+    prefs(context).getInt(KEY_WMBUS_NETWORK_PORT, 1681)
+
+  fun setWmbusNetworkPort(context: Context, port: Int) {
+    prefs(context).edit().putInt(KEY_WMBUS_NETWORK_PORT, port).apply()
+  }
+
+  fun zwaveNetworkPort(context: Context): Int =
+    prefs(context).getInt(KEY_ZWAVE_NETWORK_PORT, 1682)
+
+  fun setZwaveNetworkPort(context: Context, port: Int) {
+    prefs(context).edit().putInt(KEY_ZWAVE_NETWORK_PORT, port).apply()
+  }
+
+  fun sidewalkNetworkPort(context: Context): Int =
+    prefs(context).getInt(KEY_SIDEWALK_NETWORK_PORT, 1683)
+
+  fun setSidewalkNetworkPort(context: Context, port: Int) {
+    prefs(context).edit().putInt(KEY_SIDEWALK_NETWORK_PORT, port).apply()
   }
 
   enum class SdrSource(val value: String) {

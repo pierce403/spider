@@ -61,4 +61,59 @@ sealed class SdrReading {
     override val frequencyMhz: Double?,
     override val rawJson: String
   ) : SdrReading()
+
+  data class LoRaWan(
+    val devAddr: String,
+    val spreadingFactor: String?,
+    val codingRate: String?,
+    val payloadSize: Int?,
+    val crcOk: Boolean?,
+    override val rssi: Double?,
+    override val snr: Double?,
+    override val frequencyMhz: Double?,
+    override val rawJson: String
+  ) : SdrReading()
+
+  data class Meshtastic(
+    val nodeId: String,
+    val destId: String?,
+    val packetId: Int?,
+    val hopLimit: Int?,
+    val hopStart: Int?,
+    val channelHash: String?,
+    override val rssi: Double?,
+    override val snr: Double?,
+    override val frequencyMhz: Double?,
+    override val rawJson: String
+  ) : SdrReading()
+
+  data class WmBus(
+    val manufacturer: String,
+    val serialNumber: String,
+    val meterVersion: Int?,
+    val meterType: String?,
+    override val rssi: Double?,
+    override val snr: Double?,
+    override val frequencyMhz: Double?,
+    override val rawJson: String
+  ) : SdrReading()
+
+  data class Zwave(
+    val homeId: String,
+    val nodeId: Int,
+    val frameType: String?,
+    override val rssi: Double?,
+    override val snr: Double?,
+    override val frequencyMhz: Double?,
+    override val rawJson: String
+  ) : SdrReading()
+
+  data class Sidewalk(
+    val smsn: String,
+    val frameType: String?,
+    override val rssi: Double?,
+    override val snr: Double?,
+    override val frequencyMhz: Double?,
+    override val rawJson: String
+  ) : SdrReading()
 }

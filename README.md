@@ -1,6 +1,6 @@
 # Urchin
 
-Urchin is an Android SDR app for local RF reconnaissance. It captures and displays observations from five radio protocols — TPMS, POCSAG, ADS-B, UAT, and P25 — using either:
+Urchin is an Android SDR app for local RF reconnaissance. It captures and displays observations from ten radio protocols — TPMS, POCSAG, ADS-B, UAT, P25, LoRaWAN, Meshtastic, Wireless M-Bus, Z-Wave, and Amazon Sidewalk — using either:
 
 - A USB-attached RTL-SDR dongle
 - Network bridges streaming protocol-specific TCP output over the local network
@@ -13,13 +13,25 @@ The project landing page is at `https://urchin.guru/`.
 
 ### Multi-protocol SDR capture
 
-| Protocol | Frequency | Tool | Default network port |
-| -------- | --------- | ---- | -------------------- |
+#### RTL-SDR protocols (USB or network bridge)
+
+| Protocol | Frequency | Tool | Default port |
+| -------- | --------- | ---- | ------------ |
 | TPMS | 315 / 433.92 MHz | rtl_433 | 1234 |
 | POCSAG | 929.6125 MHz | rtl_433 | 1234 |
 | ADS-B | 1090 MHz | dump1090 | 30003 |
 | UAT | 978 MHz | dump978 | 30978 |
 | P25 | 136–800 MHz | p25_scanner / OP25 | 23456 |
+
+#### RAK2243 HAT protocols (network bridge only)
+
+| Protocol | Frequency | Tool | Default port |
+| -------- | --------- | ---- | ------------ |
+| LoRaWAN | 902–928 MHz (US) / 863–870 MHz (EU) | lora_pkt_fwd | 1680 |
+| Meshtastic | 902–928 MHz (US) / 863–870 MHz (EU) | lora_pkt_fwd | 1680 |
+| Wireless M-Bus | 868.95 MHz (EU only) | wmbus_json_bridge | 1681 |
+| Z-Wave | 908.42 MHz (US only) | zwave_json_bridge | 1682 |
+| Amazon Sidewalk | 900 MHz (US) | sidewalk_json_bridge | 1683 |
 
 - USB mode auto-detects supported hardware by VID/PID (RTL2832U dongles and HackRF One)
 - When multiple USB SDR devices are connected, Urchin assigns one dongle per frequency; with a single dongle, it uses frequency hopping
@@ -132,6 +144,10 @@ sudo sdr-pi-apply-config && sudo systemctl restart sdr-pi-*
 | ADS-B (dump1090) | 30003 |
 | UAT (dump978) | 30978 |
 | P25 (OP25) | 23456 |
+| LoRaWAN / Meshtastic (lora_pkt_fwd) | 1680 |
+| Wireless M-Bus (wmbus_json_bridge) | 1681 |
+| Z-Wave (zwave_json_bridge) | 1682 |
+| Amazon Sidewalk (sidewalk_json_bridge) | 1683 |
 
 ### Multi-dongle setup
 
@@ -186,6 +202,10 @@ See [docs/EMULATOR_SETUP.md](docs/EMULATOR_SETUP.md) for creating an AVD, launch
 | ADS-B | dump1090 or readsb (SBS/BaseStation) | 30003 |
 | UAT | dump978 | 30978 |
 | P25 | OP25 | 23456 |
+| LoRaWAN/Meshtastic | lora_pkt_fwd | 1680 |
+| Wireless M-Bus | wmbus_json_bridge | 1681 |
+| Z-Wave | zwave_json_bridge | 1682 |
+| Amazon Sidewalk | sidewalk_json_bridge | 1683 |
 
 - ADS-B network mode accepts either stock `dump1090`/`readsb` SBS lines on `30003` or the repo's JSON-based simulator output for development.
 - Frequency presets include `315 MHz` and `433.92 MHz` (TPMS), `929.6125 MHz` (POCSAG), `1090 MHz` (ADS-B), `978 MHz` (UAT), and `851 MHz` (P25).
@@ -197,7 +217,7 @@ A multi-protocol simulator is included for development and testing:
 python scripts/sdr-simulator.py
 ```
 
-It emits simulated TPMS, POCSAG, ADS-B, UAT, and P25 data on configurable TCP ports. Use `--protocols` to select specific protocols, `--burst` for stress testing, and `--help` for all options.
+It emits simulated TPMS, POCSAG, ADS-B, UAT, P25, LoRaWAN, Meshtastic, Wireless M-Bus, Z-Wave, and Amazon Sidewalk data on configurable TCP ports. Use `--protocols` to select specific protocols, `--burst` for stress testing, and `--help` for all options.
 
 ## Privacy
 

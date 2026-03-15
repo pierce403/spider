@@ -136,6 +136,11 @@ class DeviceAdapter(
       "pocsag" -> R.drawable.ic_protocol_pocsag
       "adsb", "uat" -> R.drawable.ic_protocol_adsb
       "p25" -> R.drawable.ic_protocol_p25
+      "lorawan" -> R.drawable.ic_protocol_lorawan
+      "meshtastic" -> R.drawable.ic_protocol_meshtastic
+      "wmbus" -> R.drawable.ic_protocol_wmbus
+      "zwave" -> R.drawable.ic_protocol_zwave
+      "sidewalk" -> R.drawable.ic_protocol_sidewalk
       else -> null
     }
 
